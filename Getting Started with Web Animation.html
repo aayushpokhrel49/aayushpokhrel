@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Web Animation | Aayush Pokhrel</title>
+    <meta name="description" content="A beginner's guide to web animation techniques including CSS animations, transitions, and JavaScript animation libraries">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --accent: #f72585;
+            --gray: #adb5bd;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            transition: var(--transition);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+        
+        /* Article Header */
+        .article-header {
+            padding: 150px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .article-meta-item i {
+            color: var(--primary);
+        }
+        
+        .article-featured-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        .article-content ul, 
+        .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .article-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .article-content a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Code blocks */
+        .article-content pre {
+            background: #1e1e24;
+            color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .article-content code {
+            font-family: 'Courier New', monospace;
+            background: rgba(67, 97, 238, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .article-content pre code {
+            background: transparent;
+            padding: 0;
+        }
+        
+        /* Article Footer */
+        .article-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 40px;
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .article-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .article-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        
+        .article-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            max-width: 45%;
+        }
+        
+        .article-nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+        
+        .article-nav-link i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(243, 114, 165, 0.03) 100%);
+        }
+        
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .newsletter-input:focus {
+            border-color: var(--primary);
+        }
+        
+        .newsletter-button {
+            padding: 15px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-button:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .article-featured-image {
+                height: 300px;
+            }
+            
+            .article-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .article-nav-link {
+                max-width: 100%;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-button {
+                border-radius: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">Aayush Pokhrel<span></span></a>
+            <ul class="nav-links">
+                <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">Home</a></li>
+                <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">Blog</a></li>
+                <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">About</a></li>
+                <li><a href="">Social Media</a></li>
+                <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <article class="article-header fade-in">
+        <span class="article-category">Development</span>
+        <h1 class="article-title">Getting Started with Web Animation</h1>
+        <div class="article-meta">
+            <div class="article-meta-item">
+                <i class="far fa-user"></i>
+                <span>Aayush Pokhrel</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>April 24, 2025</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-clock"></i>
+                <span>8 min read</span>
+            </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=764&q=80" alt="Web Animation Concepts" class="article-featured-image">
+    </article>
+
+    <!-- Article Content -->
+    <div class="article-content">
+        <p>Web animation is a powerful tool for enhancing user experience, guiding attention, and making websites more engaging. Whether you're a beginner or an experienced developer, understanding the basics of web animation can help you create more dynamic and interactive web applications.</p>
+        
+        <h2>Why Use Web Animation?</h2>
+        
+        <p>Animations can:</p>
+        
+        <ul>
+            <li>Improve user engagement</li>
+            <li>Provide visual feedback (e.g., button clicks, form validation)</li>
+            <li>Guide users through interactions</li>
+            <li>Make transitions smoother</li>
+            <li>Enhance storytelling and branding</li>
+        </ul>
+        
+        <h2>Types of Web Animations</h2>
+        
+        <p>1. <strong>CSS Animations</strong> – Simple animations using `@keyframes` and CSS properties.</p>
+        <p>2. <strong>CSS Transitions</strong> – Smooth property changes over time (e.g., hover effects).</p>
+        <p>3. <strong>JavaScript Animations</strong> – More control with libraries like GSAP or the Web Animations API.</p>
+        <p>4. <strong>SVG Animations</strong> – Animating scalable vector graphics for logos and icons.</p>
+        <p>5. <strong>Canvas Animations</strong> – Complex animations and games using the HTML5 `<canvas>` element.</p>
+        
+        <h2>Getting Started with CSS Animations</h2>
+        
+        <h3>1. CSS Transitions</h3>
+        
+        <p>Transitions allow smooth changes between states.</p>
+        
+        <pre><code>.button {
+  background: blue;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: red;
+}</code></pre>
+        
+        <h3>2. Keyframe Animations</h3>
+        
+        <p>For more complex animations, use `@keyframes`.</p>
+        
+        <pre><code>@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.element {
+  animation: bounce 2s infinite;
+}</code></pre>
+        
+        <h2>JavaScript Animations with the Web Animations API</h2>
+        
+        <p>For more control, JavaScript provides the Web Animations API:</p>
+        
+        <pre><code>const element = document.querySelector('.box');
+element.animate(
+  [
+    { transform: 'scale(1)' },
+    { transform: 'scale(1.5)' },
+  ],
+  {
+    duration: 1000,
+    iterations: Infinity,
+    direction: 'alternate',
+  }
+);</code></pre>
+        
+        <h2>Popular Animation Libraries</h2>
+        
+        <ul>
+            <li><strong>GSAP (GreenSock Animation Platform)</strong> – A high-performance library for complex animations.</li>
+            <li><strong>Anime.js</strong> – Lightweight and flexible animations.</li>
+            <li><strong>Motion One</strong> – A modern animation library built on the Web Animations API.</li>
+        </ul>
+        
+        <h2>Best Practices for Web Animation</h2>
+        
+        <ul>
+            <li><strong>Keep it subtle</strong> – Avoid excessive animations that distract users.</li>
+            <li><strong>Optimize performance</strong> – Use `transform` and `opacity` for smoother animations.</li>
+            <li><strong>Test on different devices</strong> – Ensure animations work well on mobile and desktop.</li>
+            <li><strong>Provide fallbacks</strong> – Some users prefer reduced motion (`prefers-reduced-motion`).</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        
+        <p>Web animation is a valuable skill for front-end developers. Start with CSS transitions and keyframes, then explore JavaScript-based animations for more advanced effects. By following best practices, you can create engaging, performant animations that enhance user experience.</p>
+        
+        <p>Ready to animate? Experiment with small projects and gradually incorporate animations into your web development workflow!</p>
+    </div>
+
+    <!-- Article Footer -->
+    <div class="article-footer">
+        <div class="article-tags">
+            <a href="#" class="article-tag">Animation</a>
+            <a href="#" class="article-tag">CSS</a>
+            <a href="#" class="article-tag">JavaScript</a>
+            <a href="#" class="article-tag">Web Development</a>
+        </div>
+        
+        <div class="article-navigation">
+            <a href="#" class="article-nav-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Modern CSS Techniques</span>
+            </a>
+            <a href="#" class="article-nav-link" style="margin-left: auto; text-align: right;">
+                <span>Next: Advanced SVG Animations</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container fade-in">
+            <h2 class="section-title">Enjoyed this article?</h2>
+            <p>Subscribe to my newsletter to receive more content like this straight to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Aayush</h3>
+                <p>Creative designer and writer sharing insights on design, technology, and the creative process.</p>
+                <div class="social-links">
+                    <a href="https://x.com/aayushpokhrel49?t=d4l3RAACProAyr8kI_NupQ&s=09" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/aayushpokhrel49?igsh=MXd6anZ5djFzZThtdg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">Home</a></li>
+                    <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">Blog</a></li>
+                    <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Home.html">About</a></li>
+                    <li><a href="https://blog-aayushpokhrel-dev.on.drv.tw/Social%20/">Social media</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        <div class="copyright">
+            <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Navigation
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.fade-in:not(.animated)');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
