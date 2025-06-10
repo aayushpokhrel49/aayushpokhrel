@@ -398,7 +398,7 @@ header.scrolled {
     flex: 1;
     min-width: 300px;
     height: 400px;
-    background-image: url('https://cdn.discordapp.com/attachments/1362027728316137484/1373287118289244250/IMG-20250504-WA0005.jpg?ex=6829dccb&is=68288b4b&hm=c171c9ad058e9b67eb2602feb6383805a104f29b688d02a0df37029ff1d9f0ba&');
+    background-image:'Photo1.png');
     background-size: cover;
     background-position: center;
     border-radius: 20px;
