@@ -42,7 +42,6 @@
             position: relative;
         }
 
-        /* Floating bubbles background */
         .bubble {
             position: absolute;
             border-radius: 50%;
@@ -466,7 +465,6 @@
             width: 100%;
         }
 
-        /* Toast notification */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -537,7 +535,6 @@
     </style>
 </head>
 <body>
-    <!-- Floating background bubbles -->
     <div class="bubble" style="width: 150px; height: 150px; top: 10%; left: 5%;"></div>
     <div class="bubble" style="width: 200px; height: 200px; bottom: 15%; right: 8%;"></div>
     <div class="bubble" style="width: 100px; height: 100px; top: 50%; left: 10%;"></div>
@@ -555,7 +552,6 @@
         </div>
 
         <div class="auth-body">
-            <!-- Login Form -->
             <div id="login-form" class="auth-content active">
                 <form id="loginForm">
                     <div class="form-group">
@@ -587,7 +583,6 @@
                 </div>
             </div>
 
-            <!-- Signup Form -->
             <div id="signup-form" class="auth-content">
                 <form id="signupForm">
                     <div class="form-group">
@@ -642,11 +637,9 @@
     </div>
 
     <script type="module">
-        // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, updateProfile, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, updateProfile, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBQNVZChEa86ZhDErZqsodndsOIzzYTKcg",
             authDomain: "login-55c76.firebaseapp.com",
@@ -656,12 +649,10 @@
             appId: "1:767553932079:web:27add89021370f41deafda"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
 
-        // Create dynamic bubbles
         function createBubbles() {
             const colors = [
                 'rgba(67, 97, 238, 0.1)', 
@@ -702,7 +693,6 @@
             }
         }
 
-        // Show toast notification
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
@@ -729,13 +719,11 @@
             }, 3000);
         }
 
-        // Validate email
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(email).toLowerCase());
         }
 
-        // Check password strength
         function checkPasswordStrength(password) {
             const strengthBar = document.getElementById('password-strength-bar');
             const strengthText = document.getElementById('password-strength-text');
@@ -779,7 +767,6 @@
             return strength;
         }
 
-        // Switch tabs
         function switchTab(tabName) {
             const tabs = document.querySelectorAll('.auth-tab');
             const forms = document.querySelectorAll('.auth-content');
@@ -805,12 +792,10 @@
             }, 400);
         }
 
-        // Form validation
         function validateForm(formId) {
             let isValid = true;
             const form = document.getElementById(formId);
             
-            // Clear previous errors
             form.querySelectorAll('.form-control').forEach(input => {
                 input.classList.remove('error');
                 const errorElement = document.getElementById(`${input.id}-error`);
@@ -877,7 +862,6 @@
             return isValid;
         }
 
-        // Handle successful authentication
         function handleAuthSuccess(userCredential, message) {
             showToast(message, 'success');
             setTimeout(() => {
@@ -885,8 +869,8 @@
             }, 2000);
         }
 
-        // Handle authentication errors
         function handleAuthError(error) {
+            console.error('Firebase Error:', error.code, error.message); // Debug log
             let errorMessage = 'An error occurred. Please try again.';
             switch (error.code) {
                 case 'auth/user-not-found':
@@ -907,17 +891,23 @@
                 case 'auth/weak-password':
                     errorMessage = 'Password is too weak.';
                     break;
+                case 'auth/popup-blocked':
+                    errorMessage = 'Popup was blocked. Trying redirect...';
+                    signInWithRedirect(auth, googleProvider); // Fallback to redirect
+                    break;
                 case 'auth/popup-closed-by-user':
                     errorMessage = 'Google sign-in was cancelled.';
                     break;
                 case 'auth/account-exists-with-different-credential':
                     errorMessage = 'Account exists with a different sign-in method.';
                     break;
+                case 'auth/network-request-failed':
+                    errorMessage = 'Network error. Please check your connection.';
+                    break;
             }
             showToast(errorMessage, 'error');
         }
 
-        // Login form submission
         let isSubmitting = false;
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -949,7 +939,6 @@
                 });
         });
 
-        // Signup form submission
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -988,18 +977,31 @@
                 });
         });
 
-        // Google Sign-In
         function handleGoogleSignIn() {
             if (isSubmitting) return;
             
             isSubmitting = true;
+            const googleBtn = document.querySelector('.social-btn.google:not(.loading)');
+            if (googleBtn) {
+                googleBtn.classList.add('loading');
+                googleBtn.querySelector('i').className = 'fas fa-spinner fa-spin';
+            }
+            
             signInWithPopup(auth, googleProvider)
                 .then((userCredential) => {
                     isSubmitting = false;
+                    if (googleBtn) {
+                        googleBtn.classList.remove('loading');
+                        googleBtn.querySelector('i').className = 'fab fa-google';
+                    }
                     handleAuthSuccess(userCredential, '🎉 Signed in with Google! Redirecting...');
                 })
                 .catch((error) => {
                     isSubmitting = false;
+                    if (googleBtn) {
+                        googleBtn.classList.remove('loading');
+                        googleBtn.querySelector('i').className = 'fab fa-google';
+                    }
                     handleAuthError(error);
                 });
         }
@@ -1007,12 +1009,20 @@
         document.getElementById('google-login').addEventListener('click', handleGoogleSignIn);
         document.getElementById('google-signup').addEventListener('click', handleGoogleSignIn);
 
-        // Password strength check
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result) {
+                    handleAuthSuccess(result, '🎉 Signed in with Google! Redirecting...');
+                }
+            })
+            .catch((error) => {
+                handleAuthError(error);
+            });
+
         document.getElementById('signup-password').addEventListener('input', function() {
             checkPasswordStrength(this.value);
         });
 
-        // Forgot password handler
         document.getElementById('forgot-password').addEventListener('click', function(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
@@ -1033,7 +1043,6 @@
                 });
         });
 
-        // Tab switching event listeners
         document.querySelectorAll('.auth-tab, .auth-footer a').forEach(element => {
             element.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1044,7 +1053,6 @@
             });
         });
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             createBubbles();
             
@@ -1062,4 +1070,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
