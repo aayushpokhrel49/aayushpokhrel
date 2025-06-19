@@ -64,7 +64,72 @@ header.scrolled {
 .logo span {
     color: var(--accent);
 }
+.sign-in-btn {
 
+background: linear-gradient(to right, var(-primary), var(--secondary));
+
+color: white;
+
+border: none;
+
+padding: 10px 20px;
+
+border-radius: 12px;
+
+font-family: 'Poppins', sans-serif;
+
+font-weight: 600;
+
+font-size: 1rem;
+
+cursor: pointer;
+
+transition: var(-transition);
+
+box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+
+position: relative;
+
+overflow: hidden;
+
+}
+
+.sign-in-btn:hover {
+
+background: linear-gradient(to right, var(-secondary), var(-primary));
+
+transform: translateY(-2px);
+
+box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+
+}
+.sign-in-btn::after {
+
+content: ";
+
+position: absolute;
+
+top: -50%;
+
+left: -50%;
+
+width: 200%;
+
+height: 200%;
+
+background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+
+transform: rotate(45deg);
+
+transition: var(-transition);
+
+}
+
+.sign-in-btn:hover::after {
+
+left: 100%;
+
+}
 .nav-links {
     display: flex;
     list-style: none;
