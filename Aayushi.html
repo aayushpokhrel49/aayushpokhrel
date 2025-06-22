@@ -800,7 +800,7 @@
             apiKey: "AIzaSyBQNVZChEa86ZhDErZqsodndsOIzzYTKcg",
             authDomain: "login-55c76.firebaseapp.com",
             projectId: "login-55c76",
-            storageBucket: "login-55c76.firebasestorage.app",
+            storageBucket: "login-55c76.appspot.com",
             messagingSenderId: "767553932079",
             appId: "1:767553932079:web:27add89021370f41deafda"
         };
@@ -810,16 +810,18 @@
             firebase.initializeApp(firebaseConfig);
             console.log("Firebase initialized successfully");
         } catch (error) {
-            console.error("Firebase initialization error:", error.message);
-            document.getElementById("auth-error").textContent = "Failed to initialize app. Please try again later.";
+            console.error("Firebase initialization error:", error);
+            document.getElementById("auth-error").textContent = "Failed to initialize app. Please refresh the page.";
         }
 
         const auth = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('profile');
+        provider.addScope('email');
 
         // Set session persistence
-        auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-            .catch(error => console.error("Persistence setup error:", error.message));
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .catch(error => console.error("Persistence setup error:", error));
 
         // DOM Elements
         const chatContent = document.getElementById("chat-content");
@@ -867,16 +869,6 @@
 
         function generateSessionId() {
             return 'session-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-        }
-
-        function getOrCreateSessionId(userId) {
-            const storageKey = `session_${userId || 'guest'}`;
-            let sessionId = localStorage.getItem(storageKey);
-            if (!sessionId) {
-                sessionId = generateSessionId();
-                localStorage.setItem(storageKey, sessionId);
-            }
-            return sessionId;
         }
 
         function setThemeProperties(isDark) {
@@ -1107,36 +1099,20 @@
             }
 
             disableAuthButtons(true);
+            authError.textContent = "";
+            
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 currentUser = userCredential.user;
-                currentSessionId = getOrCreateSessionId(currentUser.uid);
+                currentSessionId = generateSessionId();
                 userStatus.textContent = currentUser.email;
                 logoutBtn.style.display = 'inline-block';
                 loginModal.classList.add('hidden');
                 updateHistoryList();
                 loadSession(currentSessionId);
-                console.log("User signed in:", currentUser.uid, "session:", currentSessionId);
+                console.log("User signed in:", currentUser.uid);
             } catch (error) {
-                let errorMsg = "Sign-in failed!";
-                switch (error.code) {
-                    case 'auth/invalid-email':
-                        errorMsg = "Invalid email format!";
-                        break;
-                    case 'auth/user-not-found':
-                        errorMsg = "No user found with this email!";
-                        break;
-                    case 'auth/wrong-password':
-                        errorMsg = "Incorrect password!";
-                        break;
-                    case 'auth/invalid-credential':
-                        errorMsg = "Invalid credentials provided!";
-                        break;
-                    default:
-                        errorMsg = error.message;
-                }
-                authError.textContent = errorMsg;
-                console.error("Sign-in error:", error.code, error.message);
+                handleAuthError(error);
             } finally {
                 disableAuthButtons(false);
             }
@@ -1151,33 +1127,20 @@
             }
 
             disableAuthButtons(true);
+            authError.textContent = "";
+            
             try {
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                 currentUser = userCredential.user;
-                currentSessionId = getOrCreateSessionId(currentUser.uid);
+                currentSessionId = generateSessionId();
                 userStatus.textContent = currentUser.email;
                 logoutBtn.style.display = 'inline-block';
                 loginModal.classList.add('hidden');
                 updateHistoryList();
                 loadSession(currentSessionId);
-                console.log("Account created and signed in:", currentUser.uid, "session:", currentSessionId);
+                console.log("Account created:", currentUser.uid);
             } catch (error) {
-                let errorMsg = "Account creation failed!";
-                switch (error.code) {
-                    case 'auth/invalid-email':
-                        errorMsg = "Invalid email format!";
-                        break;
-                    case 'auth/email-already-in-use':
-                        errorMsg = "Email already in use!";
-                        break;
-                    case 'auth/weak-password':
-                        errorMsg = "Password is too weak (minimum 6 characters)!";
-                        break;
-                    default:
-                        errorMsg = error.message;
-                }
-                authError.textContent = errorMsg;
-                console.error("Account creation error:", error.code, error.message);
+                handleAuthError(error);
             } finally {
                 disableAuthButtons(false);
             }
@@ -1185,73 +1148,86 @@
 
         async function handleGoogleLogin() {
             disableAuthButtons(true);
+            authError.textContent = "";
+            
             try {
-                const result = await auth.signInWithPopup(provider).catch(async (error) => {
-                    if (error.code === 'auth/popup-blocked') {
-                        console.log("Popup blocked, attempting redirect...");
-                        return await auth.signInWithRedirect(provider);
-                    }
-                    throw error;
-                });
+                const result = await auth.signInWithPopup(provider);
                 currentUser = result.user;
-                currentSessionId = getOrCreateSessionId(currentUser.uid);
+                currentSessionId = generateSessionId();
                 userStatus.textContent = currentUser.displayName || currentUser.email;
                 logoutBtn.style.display = 'inline-block';
                 loginModal.classList.add('hidden');
                 updateHistoryList();
                 loadSession(currentSessionId);
-                console.log("User logged in with Google:", currentUser.uid, "session:", currentSessionId);
+                console.log("Google login successful:", currentUser.uid);
             } catch (error) {
-                let errorMsg = "Google login failed!";
-                if (error.code === 'auth/popup-blocked') {
-                    errorMsg = "Popup was blocked. Please allow popups or try again.";
-                } else if (error.code === 'auth/cancelled-popup-request') {
-                    errorMsg = "Login cancelled. Please try again.";
-                } else {
-                    errorMsg = error.message;
-                }
-                authError.textContent = errorMsg;
-                console.error("Google login error:", error.code, error.message);
+                handleAuthError(error);
             } finally {
                 disableAuthButtons(false);
             }
         }
 
         function continueAsGuest() {
-            try {
-                currentUser = null;
-                currentSessionId = getOrCreateSessionId('guest');
-                userStatus.textContent = 'Guest';
-                logoutBtn.style.display = 'none';
-                loginModal.classList.add('hidden');
-                updateHistoryList();
-                loadSession(currentSessionId);
-                console.log("Continuing as guest, session:", currentSessionId);
-            } catch (error) {
-                authError.textContent = "Failed to continue as guest. Please try again.";
-                console.error("Guest mode error:", error.message);
-            }
+            currentUser = null;
+            currentSessionId = generateSessionId();
+            userStatus.textContent = 'Guest';
+            logoutBtn.style.display = 'none';
+            loginModal.classList.add('hidden');
+            updateHistoryList();
+            loadSession(currentSessionId);
+            console.log("Continuing as guest");
         }
 
         async function handleLogout() {
             disableAuthButtons(true);
             try {
-                localStorage.removeItem(`session_${currentUser.uid}`);
                 await auth.signOut();
                 currentUser = null;
-                currentSessionId = getOrCreateSessionId('guest');
+                currentSessionId = generateSessionId();
                 userStatus.textContent = 'Guest';
                 logoutBtn.style.display = 'none';
                 loginModal.classList.remove('hidden');
                 updateHistoryList();
                 loadSession(currentSessionId);
-                console.log("Logged out, back to guest mode, session:", currentSessionId);
+                console.log("User logged out");
             } catch (error) {
                 authError.textContent = `Logout failed: ${error.message}`;
                 console.error("Logout error:", error.message);
             } finally {
                 disableAuthButtons(false);
             }
+        }
+
+        function handleAuthError(error) {
+            let errorMsg = "Authentication failed!";
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    errorMsg = "Invalid email format!";
+                    break;
+                case 'auth/user-not-found':
+                case 'auth/user-disabled':
+                    errorMsg = "User not found or disabled!";
+                    break;
+                case 'auth/wrong-password':
+                    errorMsg = "Incorrect password!";
+                    break;
+                case 'auth/email-already-in-use':
+                    errorMsg = "Email already in use!";
+                    break;
+                case 'auth/weak-password':
+                    errorMsg = "Password should be at least 6 characters!";
+                    break;
+                case 'auth/popup-blocked':
+                    errorMsg = "Popup blocked! Please allow popups for this site.";
+                    break;
+                case 'auth/popup-closed-by-user':
+                    errorMsg = "Login popup was closed before completing.";
+                    break;
+                default:
+                    errorMsg = error.message || "Authentication error occurred!";
+            }
+            authError.textContent = errorMsg;
+            console.error("Authentication error:", error.code, error.message);
         }
 
         function openHistory() {
@@ -1382,27 +1358,20 @@
             auth.onAuthStateChanged((user) => {
                 if (user) {
                     currentUser = user;
-                    currentSessionId = getOrCreateSessionId(user.uid);
+                    currentSessionId = generateSessionId();
                     userStatus.textContent = user.displayName || user.email;
                     logoutBtn.style.display = 'inline-block';
                     loginModal.classList.add('hidden');
                     updateHistoryList();
                     loadSession(currentSessionId);
-                    console.log("User authenticated:", user.uid, "session:", currentSessionId);
+                    console.log("User authenticated:", user.uid);
                 } else {
-                    currentUser = null;
-                    currentSessionId = getOrCreateSessionId('guest');
-                    userStatus.textContent = 'Guest';
-                    logoutBtn.style.display = 'none';
-                    loginModal.classList.remove('hidden');
-                    updateHistoryList();
-                    loadSession(currentSessionId);
-                    console.log("No user authenticated, showing login modal, session:", currentSessionId);
+                    continueAsGuest();
                 }
             });
 
             userInput.focus();
-            console.log("Aayushi AI initialized, ready to vibe!");
+            console.log("Aayushi AI initialized");
 
             if ('caches' in window) {
                 caches.keys().then(names => names.forEach(name => caches.delete(name)));
