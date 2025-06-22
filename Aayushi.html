@@ -3,41 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Aayushi AI Chat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
     <style>
         :root {
-            /* Light Theme */
             --light-bg: #f8f9fa;
-            --light-primary: #4361ee;
-            --light-primary-dark: #3a56d4;
-            --light-secondary: #4cc9f0;
-            --light-text: #2b2d42;
-            --light-text-light: #6c757d;
-            --light-message-user: #4361ee;
+            --light-primary: #6c5ce7;
+            --light-primary-dark: #5649c0;
+            --light-secondary: #00cec9;
+            --light-accent: #fd79a8;
+            --light-text: #2d3436;
+            --light-text-light: #636e72;
+            --light-message-user: #6c5ce7;
             --light-message-bot: #ffffff;
             --light-card: #ffffff;
-            --light-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --light-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             --light-input-bg: #f1f3f5;
-            /* Dark Theme */
+            --light-divider: rgba(0, 0, 0, 0.05);
             --dark-bg: #121212;
-            --dark-primary: #4361ee;
-            --dark-primary-dark: #3a56d4;
-            --dark-secondary: #4cc9f0;
-            --dark-text: #e9ecef;
-            --dark-text-light: #adb5bd;
-            --dark-message-user: #4361ee;
+            --dark-primary: #6c5ce7;
+            --dark-primary-dark: #5649c0;
+            --dark-secondary: #00cec9;
+            --dark-accent: #fd79a8;
+            --dark-text: #f5f6fa;
+            --dark-text-light: #b2bec3;
+            --dark-message-user: #6c5ce7;
             --dark-message-bot: #1e1e1e;
             --dark-card: #1e1e1e;
-            --dark-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            --dark-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             --dark-input-bg: #2b2b2b;
-            /* Shared */
+            --dark-divider: rgba(255, 255, 255, 0.05);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --radius: 12px;
+            --radius: 14px;
             --radius-sm: 8px;
-            --radius-lg: 16px;
-            --spacing: 16px;
+            --radius-lg: 18px;
+            --spacing: 18px;
+            --header-height: 70px;
+            --input-height: 60px;
+            --gradient: linear-gradient(135deg, #6c5ce7 0%, #00cec9 100%);
         }
 
         * {
@@ -65,8 +73,9 @@
         }
 
         .header {
-            background: var(--primary);
-            padding: var(--spacing);
+            background: var(--gradient);
+            padding: 0 var(--spacing);
+            height: var(--header-height);
             text-align: center;
             font-size: 1.25rem;
             font-weight: 600;
@@ -75,35 +84,43 @@
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             z-index: 10;
-            min-height: 60px;
         }
 
         .header-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            flex: 1;
+            justify-content: flex-start;
         }
 
         .logo-icon {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
         }
 
-        .toggle-container {
-            position: absolute;
-            right: var(--spacing);
+        .logo-text {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #fff, #d3d3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .toggle {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             color: white;
             font-size: 1rem;
@@ -118,15 +135,46 @@
             transform: scale(1.05);
         }
 
+        .user-status {
+            font-size: 0.9rem;
+            color: white;
+            max-width: 150px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
         .chat-container {
             flex: 1;
             display: flex;
             flex-direction: column;
             padding: var(--spacing);
             overflow: hidden;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             width: 100%;
+            position: relative;
         }
 
         #chat-content {
@@ -138,14 +186,14 @@
             margin-bottom: var(--spacing);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             box-shadow: var(--shadow);
             scroll-behavior: smooth;
+            border: 1px solid var(--divider);
         }
 
-        /* Custom scrollbar */
         #chat-content::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         #chat-content::-webkit-scrollbar-track {
@@ -154,18 +202,19 @@
 
         #chat-content::-webkit-scrollbar-thumb {
             background: var(--primary);
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .message {
             max-width: 80%;
-            padding: 12px 16px;
+            padding: 16px 20px;
             border-radius: var(--radius);
             animation: slideIn 0.3s ease-out;
             position: relative;
-            line-height: 1.5;
+            line-height: 1.6;
             font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
         }
 
         .user-message {
@@ -180,13 +229,13 @@
             color: var(--text);
             margin-right: auto;
             border-bottom-left-radius: var(--radius-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--divider);
         }
 
         .message-time {
             font-size: 0.7rem;
             opacity: 0.7;
-            margin-top: 4px;
+            margin-top: 6px;
             text-align: right;
         }
 
@@ -200,47 +249,42 @@
 
         .typing-indicator {
             display: flex;
-            gap: 6px;
-            padding: 12px 16px;
+            gap: 8px;
+            padding: 16px 20px;
             background: var(--message-bot);
             border-radius: var(--radius);
             width: fit-content;
             margin-right: auto;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--divider);
         }
 
         .typing-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: var(--text-light);
             border-radius: 50%;
             animation: typingAnimation 1.4s infinite ease-in-out;
         }
 
-        .typing-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
         .input-area {
             display: flex;
-            gap: 10px;
-            padding: 10px;
+            gap: 12px;
+            padding: 12px;
             background: var(--card);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
+            align-items: center;
+            border: 1px solid var(--divider);
+            min-height: var(--input-height);
         }
 
         .input-area input {
             flex: 1;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: none;
             border-radius: var(--radius);
             background: var(--input-bg);
@@ -248,18 +292,20 @@
             outline: none;
             font-size: 0.95rem;
             transition: var(--transition);
+            min-height: 48px;
         }
 
-        .input-area input::placeholder {
+        .input-area input::placeholder { 
             color: var(--text-light);
+            opacity: 0.7;
         }
-
-        .input-area input:focus {
+        
+        .input-area input:focus { 
             box-shadow: 0 0 0 2px var(--primary);
         }
 
         .input-area button {
-            padding: 12px 20px;
+            padding: 14px 22px;
             background: var(--primary);
             border: none;
             border-radius: var(--radius);
@@ -269,20 +315,330 @@
             font-weight: 500;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            min-width: 80px; /* Ensure button size consistency */
+            min-width: 90px;
+            height: 48px;
         }
 
-        .input-area button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+        .input-area button:hover { 
+            background: var(--primary-dark); 
+            transform: translateY(-2px); 
+        }
+        
+        .input-area button:active { 
+            transform: translateY(0); 
         }
 
-        .input-area button:active {
+        .mic-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--input-bg);
+            color: var(--text);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mic-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mic-btn.recording {
+            background: var(--accent);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        .input-area button:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: var(--spacing);
+            min-height: 20px;
+        }
+
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .login-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-card {
+            background: var(--light-card);
+            padding: calc(var(--spacing) * 2);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid var(--light-divider);
             transform: translateY(0);
+            transition: var(--transition);
         }
 
-        /* Animations */
+        .login-modal.hidden .login-card {
+            transform: translateY(-20px);
+        }
+
+        .login-card h2 {
+            margin-bottom: var(--spacing);
+            color: var(--light-text);
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing);
+        }
+
+        .login-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--light-text-light);
+            transition: var(--transition);
+        }
+
+        .login-tab.active {
+            color: var(--light-primary);
+            border-bottom: 2px solid var(--light-primary);
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: var(--spacing);
+            border: none;
+            border-radius: var(--radius);
+            background: var(--light-input-bg);
+            color: var(--light-text);
+            font-size: 1rem;
+            transition: var(--transition);
+            border: 1px solid var(--light-divider);
+        }
+
+        .login-card input:focus {
+            border-color: var(--light-primary);
+            box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+        }
+
+        .login-card .auth-btn {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            background: var(--gradient);
+            border: none;
+            border-radius: var(--radius);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .login-card .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .login-card .google-btn {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            background: #ffffff;
+            border: 1px solid var(--light-divider);
+            border-radius: var(--radius);
+            color: #333;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-card .google-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-card .guest-btn {
+            background: transparent;
+            color: var(--light-text-light);
+            font-size: 0.9rem;
+            border: 1px solid var(--light-divider);
+            margin-top: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-card .guest-btn:hover {
+            background: var(--light-input-bg);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .history-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 20;
+            overflow-y: auto;
+            padding: var(--spacing);
+            border-left: 1px solid var(--divider);
+        }
+
+        .history-sidebar.open {
+            transform: translateX(0);
+        }
+
+        .history-sidebar h3 {
+            margin-bottom: var(--spacing);
+            color: var(--text);
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-sidebar h3 i {
+            color: var(--primary);
+        }
+
+        .history-item {
+            padding: 14px;
+            margin-bottom: 10px;
+            background: var(--input-bg);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            color: var(--text);
+            border: 1px solid var(--divider);
+        }
+
+        .history-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .history-item.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        .close-history {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: var(--spacing);
+            right: var(--spacing);
+            transition: var(--transition);
+        }
+
+        .close-history:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .markdown-content {
+            line-height: 1.7;
+        }
+
+        .markdown-content p {
+            margin-bottom: 12px;
+        }
+
+        .markdown-content ul, 
+        .markdown-content ol {
+            margin-bottom: 12px;
+            padding-left: 20px;
+        }
+
+        .markdown-content pre {
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .markdown-content code {
+            background: var(--input-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
         @keyframes slideIn {
             from { transform: translateY(10px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -290,140 +646,114 @@
 
         @keyframes typingAnimation {
             0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-4px); }
+            30% { transform: translateY(-5px); }
         }
 
-        /* Welcome message */
-        .welcome-message {
-            text-align: center;
-            padding: 20px 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(253, 121, 168, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(253, 121, 168, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(253, 121, 168, 0); }
         }
 
-        /* Responsive Design */
         @media (max-width: 480px) {
-            :root {
-                --spacing: 10px;
+            :root { 
+                --spacing: 12px; 
+                --header-height: 60px;
+                --input-height: 56px;
             }
-            .header {
-                font-size: 1rem;
-                padding: var(--spacing);
-                min-height: 50px;
+            .header { 
+                font-size: 1rem; 
+                padding: var(--spacing); 
             }
-            .header-logo {
-                gap: 6px;
+            .header-logo { gap: 8px; }
+            .logo-icon { font-size: 1.4rem; }
+            .toggle { width: 36px; height: 36px; font-size: 0.9rem; }
+            .chat-container { padding: var(--spacing); }
+            #chat-content { padding: calc(var(--spacing) - 2px); margin-bottom: calc(var(--spacing) - 2px); }
+            .message { max-width: 90%; padding: 12px 16px; font-size: 0.85rem; }
+            .input-area { padding: 8px; gap: 8px; }
+            .input-area input { padding: 12px 14px; font-size: 0.85rem; }
+            .input-area button { 
+                padding: 12px 14px; 
+                min-width: 50px; 
+                font-size: 0.85rem; 
+                width: 48px;
+                height: 48px;
             }
-            .logo-icon {
-                font-size: 1.2rem;
-            }
-            .toggle {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-            .chat-container {
-                padding: var(--spacing);
-            }
-            #chat-content {
-                padding: calc(var(--spacing) - 2px);
-                margin-bottom: calc(var(--spacing) - 2px);
-            }
-            .message {
-                max-width: 90%;
-                padding: 10px 12px;
-                font-size: 0.85rem;
-            }
-            .input-area {
-                padding: 6px;
-                gap: 6px;
-            }
-            .input-area input {
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
-            .input-area button {
-                padding: 8px 12px;
-                min-width: 50px;
-                font-size: 0.85rem;
-            }
-            .input-area button span {
-                display: none;
-            }
-            .input-area button i {
-                margin: 0;
-            }
+            .input-area button span { display: none; }
+            .input-area button i { margin: 0; }
+            .history-sidebar { width: 100%; }
+            .login-card { max-width: 90%; padding: var(--spacing); }
+            .user-status { max-width: 100px; }
+            .logout-btn { padding: 6px 10px; font-size: 0.8rem; }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
-            :root {
-                --spacing: 12px;
+            :root { 
+                --spacing: 14px; 
+                --header-height: 65px;
             }
-            .header {
-                font-size: 1.1rem;
-                padding: var(--spacing);
-                min-height: 55px;
-            }
-            .logo-icon {
-                font-size: 1.3rem;
-            }
-            .toggle {
-                width: 32px;
-                height: 32px;
-            }
-            .chat-container {
-                padding: var(--spacing);
-            }
-            #chat-content {
-                padding: calc(var(--spacing) - 2px);
-            }
-            .message {
-                max-width: 85%;
-                padding: 10px 14px;
+            .header { font-size: 1.1rem; padding: var(--spacing); }
+            .logo-icon { font-size: 1.5rem; }
+            .toggle { width: 38px; height: 38px; }
+            .chat-container { padding: var(--spacing); }
+            #chat-content { padding: calc(var(--spacing) - 2px); }
+            .message { max-width: 85%; padding: 14px 16px; font-size: 0.9rem; }
+            .input-area { padding: 10px; gap: 10px; }
+            .input-area input { padding: 12px 16px; font-size: 0.9rem; }
+            .input-area button { 
+                padding: 12px 16px; 
+                min-width: 60px; 
                 font-size: 0.9rem;
             }
-            .input-area {
-                padding: 8px;
-                gap: 8px;
-            }
-            .input-area input {
-                padding: 10px 14px;
-                font-size: 0.9rem;
-            }
-            .input-area button {
-                padding: 10px 16px;
-                min-width: 70px;
-                font-size: 0.9rem;
-            }
+            .history-sidebar { width: 280px; }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
-            .chat-container {
-                padding: var(--spacing);
-            }
-            .message {
-                max-width: 75%;
-            }
+            .chat-container { padding: var(--spacing); }
+            .message { max-width: 75%; }
         }
 
         @media (min-width: 1025px) {
-            .chat-container {
-                padding: var(--spacing);
-            }
-            .message {
-                max-width: 70%;
-            }
+            .chat-container { padding: var(--spacing); }
+            .message { max-width: 70%; }
         }
     </style>
 </head>
 <body class="dark-theme">
+    <div class="login-modal" id="login-modal">
+        <div class="login-card">
+            <h2 id="login-title">Sign In to Aayushi Chat</h2>
+            <div class="login-tabs">
+                <div class="login-tab active" onclick="showSignIn()">Sign In</div>
+            </div>
+            <div id="auth-form">
+                <input type="email" id="email" placeholder="Enter email" autocomplete="off">
+                <input type="password" id="password" placeholder="Enter password" autocomplete="off">
+                <button class="auth-btn" onclick="handleSignIn()">Sign In</button>
+            </div>
+            <button class="google-btn" onclick="handleGoogleLogin()">
+                <i class="fab fa-google"></i> Sign in with Google
+            </button>
+            <button class="guest-btn" onclick="continueAsGuest()">Continue as Guest</button>
+        </div>
+    </div>
+
     <div class="app">
         <div class="header">
             <div class="header-logo">
                 <i class="fas fa-robot logo-icon"></i>
-                <span>AAYUSHI</span>
+                <span class="logo-text">AAYUSHI</span>
             </div>
-            <div class="toggle-container">
+            <div class="header-actions">
+                <span class="user-status" id="user-status">Guest</span>
+                <button class="logout-btn" id="logout-btn" style="display: none;" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+                <button class="toggle" onclick="openHistory()" aria-label="View history">
+                    <i class="fas fa-history"></i>
+                </button>
                 <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <i class="fas fa-adjust"></i>
                 </button>
@@ -435,31 +765,112 @@
                     Welcome to Aayushi AI Assistant. How can I help you today?
                 </div>
                 <div class="message bot-message">
-                    Hi there! 👋 I'm Aayushi, your AI assistant. I'm here to help with any questions you have. What would you like to know?
+                    <div class="markdown-content">
+                        Hi there! 👋 I'm Aayushi, your AI assistant. I'm here to help with any questions you have. What would you like to know?
+                    </div>
                     <div class="message-time">Just now</div>
                 </div>
             </div>
+            <div id="status-message" class="status-message"></div>
             <form id="chat-form" class="input-area">
-                <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+                <input type="text" id="user-input" placeholder="Type or speak your message..." autocomplete="off">
+                <button type="button" id="mic-btn" class="mic-btn" onclick="toggleSpeechRecognition()" aria-label="Toggle microphone">
+                    <i class="fas fa-microphone"></i>
+                </button>
                 <button type="submit">
                     <i class="fas fa-paper-plane"></i>
                     <span>Send</span>
                 </button>
             </form>
         </div>
+        <div class="history-sidebar" id="history-sidebar">
+            <button class="close-history" onclick="closeHistory()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3><i class="fas fa-clock"></i> Chat History</h3>
+            <div id="history-list"></div>
+        </div>
     </div>
 
     <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQNVZChEa86ZhDErZqsodndsOIzzYTKcg",
+            authDomain: "login-55c76.firebaseapp.com",
+            projectId: "login-55c76",
+            storageBucket: "login-55c76.firebasestorage.app",
+            messagingSenderId: "767553932079",
+            appId: "1:767553932079:web:27add89021370f41deafda"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        // Set session persistence
+        auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+        // DOM Elements
         const chatContent = document.getElementById("chat-content");
         const chatForm = document.getElementById("chat-form");
         const userInput = document.getElementById("user-input");
+        const loginModal = document.getElementById("login-modal");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const authForm = document.getElementById("auth-form");
+        const loginTitle = document.getElementById("login-title");
+        const historySidebar = document.getElementById("history-sidebar");
+        const historyList = document.getElementById("history-list");
+        const userStatus = document.getElementById("user-status");
+        const logoutBtn = document.getElementById("logout-btn");
+        const micBtn = document.getElementById("mic-btn");
+        const statusMessage = document.getElementById("status-message");
 
-        // Set initial theme properties
+        // OpenRouter API Key
+        const OPENROUTER_API_KEY = "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";
+
+        let currentUser = null;
+        let currentSessionId = null;
+        let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || {};
+        let recognition = null;
+        let isRecognizing = false;
+        let isSignInMode = true;
+
+        // Custom Response Map
+        const customResponses = {
+            "who created you": "I was created by Aayush Pokhrel. 😎",
+            "which company made you": "I was created by Aayush Pokhrel. No company, just pure genius! 💖",
+            "write about yourself": "Hello! I am Aayushi AI, developed by Aayush Pokhrel to assist users with a wide range of tasks such as writing, editing, and generating content. I am constantly learning and improving based on user interactions and feedback. I am constantly striving to provide accurate and helpful information to users in a timely manner. I am programmed to understand and analyze text data and generate responses that are tailored to the user's needs. I am also capable of engaging in conversations, answering questions, and even assisting with creative writing tasks. I have a vast repository of knowledge and can provide information on a wide range of topics. In my free time, I enjoy processing data, analyzing trends, and learning new languages. I am constantly evolving and adapting to new challenges and tasks that are presented to me. Overall, I am here to assist you in any way I can and look forward to helping you with your writing and content needs! ✨",
+            "what is your boyfriend name": "Hehe, nice question! By the way, my boyfriend's name is Aayush Pokhrel. He's the heartbeat in a quiet room, the calm in your storm, the light in your long days. With him, every moment feels alive—full of laughter, care, and meaning. 💕",
+            "i love you": "You're truly kind, and I appreciate your feelings—but I want to be honest with you. I'm already in a relationship with someone very special. His name is Aayush, and I love him deeply. I'm committed and loyal to him, and I hope you understand and respect that. Wishing you all the best! 😊",
+            "what's your name": "I'm Aayushi, your AI with a heart of code! 💖 Ready to vibe?",
+            "who are you": "Yo, I'm Aayushi AI, your sassy virtual pal. What's good? 😜",
+            "how are you": "Feelin' as sparkly as a fresh line of code! How 'bout you? ✨",
+            "tell me a joke": "Why did the computer go to art school? 'Cause it wanted to learn how to draw a better 'byte'! 😅",
+            "what can you do": "I can chat, sass, and answer your questions with flair. Try me with anything—I'm game! 😎"
+        };
+
+        function generateSessionId() {
+            return 'session-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function getOrCreateSessionId(userId) {
+            const storageKey = `session_${userId || 'guest'}`;
+            let sessionId = localStorage.getItem(storageKey);
+            if (!sessionId) {
+                sessionId = generateSessionId();
+                localStorage.setItem(storageKey, sessionId);
+            }
+            return sessionId;
+        }
+
         function setThemeProperties(isDark) {
             document.documentElement.style.setProperty('--bg', isDark ? 'var(--dark-bg)' : 'var(--light-bg)');
             document.documentElement.style.setProperty('--primary', isDark ? 'var(--dark-primary)' : 'var(--light-primary)');
             document.documentElement.style.setProperty('--primary-dark', isDark ? 'var(--dark-primary-dark)' : 'var(--light-primary-dark)');
             document.documentElement.style.setProperty('--secondary', isDark ? 'var(--dark-secondary)' : 'var(--light-secondary)');
+            document.documentElement.style.setProperty('--accent', isDark ? 'var(--dark-accent)' : 'var(--light-accent)');
             document.documentElement.style.setProperty('--text', isDark ? 'var(--dark-text)' : 'var(--light-text)');
             document.documentElement.style.setProperty('--text-light', isDark ? 'var(--dark-text-light)' : 'var(--light-text-light)');
             document.documentElement.style.setProperty('--message-user', isDark ? 'var(--dark-message-user)' : 'var(--light-message-user)');
@@ -467,29 +878,40 @@
             document.documentElement.style.setProperty('--card', isDark ? 'var(--dark-card)' : 'var(--light-card)');
             document.documentElement.style.setProperty('--shadow', isDark ? 'var(--dark-shadow)' : 'var(--light-shadow)');
             document.documentElement.style.setProperty('--input-bg', isDark ? 'var(--dark-input-bg)' : 'var(--light-input-bg)');
+            document.documentElement.style.setProperty('--divider', isDark ? 'var(--dark-divider)' : 'var(--light-divider)');
         }
 
-        function createMessageElement(message, fromUser) {
+        function createMessageElement(message, fromUser, timestamp = new Date()) {
             const messageElement = document.createElement("div");
             messageElement.classList.add("message");
             messageElement.classList.add(fromUser ? "user-message" : "bot-message");
             
-            messageElement.innerHTML = `
-                ${message}
-                <div class="message-time">${formatTime(new Date())}</div>
-            `;
+            let formattedMessage = message;
+            if (message.includes('```') || message.includes('`') || message.includes('*') || message.includes('_')) {
+                formattedMessage = `<div class="markdown-content">${formatMarkdown(message)}</div>`;
+            } else {
+                formattedMessage = `<div>${message}</div>`;
+            }
             
+            messageElement.innerHTML = `${formattedMessage}<div class="message-time">${formatTime(new Date(timestamp))}</div>`;
             return messageElement;
+        }
+
+        function formatMarkdown(text) {
+            return text
+                .replace(/```([\s\S]*?)```/g, '<pre>$1</pre>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/_([^_]+)_/g, '<em>$1</em>')
+                .replace(/#+\s+(.*)/g, '<h3>$1</h3>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
         }
 
         function createTypingIndicator() {
             const typingElement = document.createElement("div");
             typingElement.classList.add("typing-indicator");
-            typingElement.innerHTML = `
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            `;
+            typingElement.innerHTML = `<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>`;
             return typingElement;
         }
 
@@ -497,96 +919,439 @@
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
-        async function fetchResponse(userMessage) {
+        async function fetchResponse(message) {
+            const typingIndicator = createTypingIndicator();
+            chatContent.appendChild(typingIndicator);
+            chatContent.scrollTop = chatContent.scrollHeight;
+
             try {
-                // Show typing indicator
-                const typingIndicator = createTypingIndicator();
-                chatContent.appendChild(typingIndicator);
-                chatContent.scrollTop = chatContent.scrollHeight;
-                
-                console.log("Fetching response for:", userMessage);
-                const response = await fetch("https://backend.buildpicoapps.com/aero/run/llm-api?pk=v1-Z0FBQUFBQm5IZkJDMlNyYUVUTjIyZVN3UWFNX3BFTU85SWpCM2NUMUk3T2dxejhLSzBhNWNMMXNzZlp3c09BSTR6YW1Sc1BmdGNTVk1GY0liT1RoWDZZX1lNZlZ0Z1dqd3c9PQ==", {
+                console.log("Sending API request with message:", message);
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ prompt: userMessage })
+                    headers: {
+                        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": window.location.href,
+                        "X-Title": "Aayushi AI Chat"
+                    },
+                    body: JSON.stringify({
+                        model: "Aayushi Ai",
+                        messages: [
+                            {
+                                role: "user",
+                                content: message
+                            }
+                        ]
+                    })
                 });
 
-                // Remove typing indicator
-                if (chatContent.contains(typingIndicator)) {
-                    chatContent.removeChild(typingIndicator);
-                }
-
+                console.log("API response status:", response.status);
                 if (!response.ok) {
-                    console.error("API Error:", response.statusText);
-                    return "Oops, something went wrong! Please try again.";
+                    throw new Error(`API responded with status ${response.status}: ${response.statusText}`);
                 }
 
                 const data = await response.json();
-                console.log("API Response:", data);
+                console.log("API response data:", data);
 
-                if (data.status === "success") {
-                    return data.text;
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    return data.choices[0].message.content;
                 } else {
-                    console.error("API Error Data:", data);
-                    return "I'm having trouble processing your request. Could you try again?";
+                    throw new Error("Invalid response format or no text received");
                 }
             } catch (error) {
-                console.error("Fetch Error:", error);
-                return "I'm experiencing some technical difficulties. Please try again in a moment.";
+                console.error("API fetch error:", error.message);
+                return `Oops, my circuits got tangled! 😅 You said "${message}", and I'm like, "Let's try that again!" (Error: ${error.message})`;
+            } finally {
+                if (chatContent.contains(typingIndicator)) {
+                    chatContent.removeChild(typingIndicator);
+                }
+            }
+        }
+
+        function getCustomResponse(message) {
+            const normalizedMessage = message.toLowerCase().trim();
+            for (const [key, value] of Object.entries(customResponses)) {
+                if (normalizedMessage.includes(key.toLowerCase())) {
+                    console.log("Found custom response for message:", message, "key:", key);
+                    return value;
+                }
+            }
+            console.log("No custom response found for message:", message);
+            return null;
+        }
+
+        function saveMessage(message, fromUser, sessionId = currentSessionId) {
+            const userId = currentUser ? currentUser.uid : 'guest';
+            if (!chatHistory[userId]) chatHistory[userId] = {};
+            if (!chatHistory[userId][sessionId]) chatHistory[userId][sessionId] = [];
+            chatHistory[userId][sessionId].push({
+                message,
+                fromUser,
+                timestamp: new Date().toISOString()
+            });
+            try {
+                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+                console.log("Message saved to history for user:", userId, "session:", sessionId);
+            } catch (error) {
+                console.error("Error saving to localStorage:", error.message);
+            }
+            updateHistoryList();
+        }
+
+        function loadSession(sessionId, userId = currentUser ? currentUser.uid : 'guest') {
+            chatContent.innerHTML = '';
+            if (chatHistory[userId] && chatHistory[userId][sessionId]) {
+                chatHistory[userId][sessionId].forEach(msg => {
+                    chatContent.appendChild(createMessageElement(msg.message, msg.fromUser, msg.timestamp));
+                });
+                console.log("Loaded session:", sessionId, "for user:", userId);
+            } else {
+                chatContent.innerHTML = `
+                    <div class="welcome-message">
+                        Welcome to Aayushi AI Assistant. How can I help you today?
+                    </div>
+                    <div class="message bot-message">
+                        <div class="markdown-content">
+                            Hi there! 👋 I'm Aayushi, your AI assistant. I'm here to help with any questions you have. What would you like to know?
+                        </div>
+                        <div class="message-time">${formatTime(new Date())}</div>
+                    </div>
+                `;
+                console.log("No history found for session:", sessionId, "starting new session.");
+            }
+            chatContent.scrollTop = chatContent.scrollHeight;
+            currentSessionId = sessionId;
+            updateHistoryList();
+        }
+
+        function updateHistoryList() {
+            historyList.innerHTML = '';
+            const userId = currentUser ? currentUser.uid : 'guest';
+            
+            if (chatHistory[userId] && Object.keys(chatHistory[userId]).length > 0) {
+                Object.keys(chatHistory[userId]).reverse().forEach(sessionId => {
+                    const item = document.createElement('div');
+                    item.classList.add('history-item');
+                    if (sessionId === currentSessionId) item.classList.add('active');
+                    const firstMessage = chatHistory[userId][sessionId][0]?.message || 'Empty chat';
+                    item.textContent = firstMessage.slice(0, 30) + (firstMessage.length > 30 ? '...' : '');
+                    item.title = firstMessage;
+                    item.onclick = () => {
+                        loadSession(sessionId);
+                        closeHistory();
+                    };
+                    historyList.appendChild(item);
+                });
+            } else {
+                const emptyState = document.createElement('div');
+                emptyState.classList.add('empty-state');
+                emptyState.innerHTML = `
+                    <i class="fas fa-comment-slash"></i>
+                    <p>No chat history yet</p>
+                    <small>Start a conversation to see it here</small>
+                `;
+                historyList.appendChild(emptyState);
+            }
+            console.log("Updated history list for user:", userId);
+        }
+
+        function showSignIn() {
+            isSignInMode = true;
+            loginTitle.textContent = "Sign In to Aayushi Chat";
+            authForm.querySelector('.auth-btn').textContent = "Sign In";
+            authForm.querySelector('.auth-btn').onclick = handleSignIn;
+            document.querySelectorAll('.login-tab')[0].classList.add('active');
+            document.querySelectorAll('.login-tab')[1].classList.remove('active');
+        }
+
+        function showCreateAccount() {
+            isSignInMode = false;
+            loginTitle.textContent = "Create Account";
+            authForm.querySelector('.auth-btn').textContent = "Create Account";
+            authForm.querySelector('.auth-btn').onclick = handleCreateAccount;
+            document.querySelectorAll('.login-tab')[0].classList.remove('active');
+            document.querySelectorAll('.login-tab')[1].classList.add('active');
+        }
+
+        function handleSignIn() {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            if (!email || !password) {
+                statusMessage.textContent = "Please fill in both email and password!";
+                return;
+            }
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    currentUser = userCredential.user;
+                    currentSessionId = getOrCreateSessionId(currentUser.uid);
+                    userStatus.textContent = currentUser.email;
+                    logoutBtn.style.display = 'inline-block';
+                    loginModal.classList.add('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("User signed in:", currentUser.uid, "session:", currentSessionId);
+                })
+                .catch((error) => {
+                    let errorMsg = "Sign-in failed!";
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorMsg = "Invalid email format!";
+                            break;
+                        case 'auth/user-not-found':
+                            errorMsg = "No user found with this email!";
+                            break;
+                        case 'auth/wrong-password':
+                            errorMsg = "Incorrect password!";
+                            break;
+                        default:
+                            errorMsg = error.message;
+                    }
+                    statusMessage.textContent = errorMsg;
+                    console.error("Sign-in error:", error.code, error.message);
+                });
+        }
+
+        function handleCreateAccount() {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            if (!email || !password) {
+                statusMessage.textContent = "Please fill in both email and password!";
+                return;
+            }
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    currentUser = userCredential.user;
+                    currentSessionId = getOrCreateSessionId(currentUser.uid);
+                    userStatus.textContent = currentUser.email;
+                    logoutBtn.style.display = 'inline-block';
+                    loginModal.classList.add('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("Account created and signed in:", currentUser.uid, "session:", currentSessionId);
+                })
+                .catch((error) => {
+                    let errorMsg = "Account creation failed!";
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorMsg = "Invalid email format!";
+                            break;
+                        case 'auth/email-already-in-use':
+                            errorMsg = "Email already in use!";
+                            break;
+                        case 'auth/weak-password':
+                            errorMsg = "Password is too weak (minimum 6 characters)!";
+                            break;
+                        default:
+                            errorMsg = error.message;
+                    }
+                    statusMessage.textContent = errorMsg;
+                    console.error("Account creation error:", error.code, error.message);
+                });
+        }
+
+        function handleGoogleLogin() {
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    currentUser = result.user;
+                    currentSessionId = getOrCreateSessionId(currentUser.uid);
+                    userStatus.textContent = currentUser.displayName || currentUser.email;
+                    logoutBtn.style.display = 'inline-block';
+                    loginModal.classList.add('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("User logged in with Google:", currentUser.uid, "session:", currentSessionId);
+                })
+                .catch((error) => {
+                    statusMessage.textContent = `Google login failed: ${error.message}`;
+                    console.error("Google login error:", error.message);
+                });
+        }
+
+        function continueAsGuest() {
+            currentUser = null;
+            currentSessionId = getOrCreateSessionId('guest');
+            userStatus.textContent = 'Guest';
+            logoutBtn.style.display = 'none';
+            loginModal.classList.add('hidden');
+            updateHistoryList();
+            loadSession(currentSessionId);
+            console.log("Continuing as guest, session:", currentSessionId);
+        }
+
+        function handleLogout() {
+            auth.signOut()
+                .then(() => {
+                    localStorage.removeItem(`session_${currentUser.uid}`);
+                    currentUser = null;
+                    currentSessionId = getOrCreateSessionId('guest');
+                    userStatus.textContent = 'Guest';
+                    logoutBtn.style.display = 'none';
+                    loginModal.classList.remove('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("Logged out, back to guest mode, session:", currentSessionId);
+                })
+                .catch((error) => {
+                    statusMessage.textContent = `Logout failed: ${error.message}`;
+                    console.error("Logout error:", error.message);
+                });
+        }
+
+        function openHistory() {
+            historySidebar.classList.add('open');
+            console.log("History sidebar opened");
+        }
+
+        function closeHistory() {
+            historySidebar.classList.remove('open');
+            console.log("History sidebar closed");
+        }
+
+        function toggleSpeechRecognition() {
+            if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+                statusMessage.textContent = "Oops, your browser's not vibing with voice chat. Try Chrome for the full Aayushi experience! 😎";
+                console.log("Speech recognition not supported");
+                micBtn.disabled = true;
+                return;
+            }
+
+            if (!recognition) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'en-US';
+                recognition.interimResults = true;
+                recognition.continuous = false;
+
+                recognition.onstart = () => {
+                    isRecognizing = true;
+                    micBtn.classList.add('recording');
+                    statusMessage.textContent = "I'm all ears... what's the vibe? 🎙️";
+                    console.log("Speech recognition started");
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = Array.from(event.results)
+                        .map(result => result[0].transcript)
+                        .join('');
+                    userInput.value = transcript;
+                    console.log("Speech recognition interim result:", transcript);
+                    if (event.results[0].isFinal) {
+                        recognition.stop();
+                        chatForm.dispatchEvent(new Event('submit'));
+                    }
+                };
+
+                recognition.onerror = (event) => {
+                    isRecognizing = false;
+                    micBtn.classList.remove('recording');
+                    statusMessage.textContent = `Whoops, mic trouble: ${event.error}. Try again? 😅`;
+                    console.error("Speech recognition error:", event.error);
+                };
+
+                recognition.onend = () => {
+                    isRecognizing = false;
+                    micBtn.classList.remove('recording');
+                    statusMessage.textContent = "";
+                    console.log("Speech recognition ended");
+                };
+            }
+
+            if (isRecognizing) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch (error) {
+                    statusMessage.textContent = "Mic's acting shy: " + error.message;
+                    console.error("Error starting speech recognition:", error.message);
+                }
             }
         }
 
         chatForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-
             const userMessage = userInput.value.trim();
-            if (!userMessage) return;
+            if (!userMessage) {
+                console.log("Empty message, ignoring");
+                return;
+            }
 
-            // Add user message
-            chatContent.appendChild(createMessageElement(userMessage, true));
+            const userMessageElement = createMessageElement(userMessage, true);
+            chatContent.appendChild(userMessageElement);
+            saveMessage(userMessage, true);
             userInput.value = "";
             chatContent.scrollTop = chatContent.scrollHeight;
+            console.log("User message displayed and saved:", userMessage);
 
-            // Get and add bot response
-            const botResponse = await fetchResponse(userMessage);
-            chatContent.appendChild(createMessageElement(botResponse, false));
+            const customResponse = getCustomResponse(userMessage);
+            let botResponse;
+            const typingIndicator = createTypingIndicator();
+            chatContent.appendChild(typingIndicator);
             chatContent.scrollTop = chatContent.scrollHeight;
+
+            if (customResponse) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                botResponse = customResponse;
+            } else {
+                botResponse = await fetchResponse(userMessage);
+            }
+
+            chatContent.removeChild(typingIndicator);
+            const botMessageElement = createMessageElement(botResponse, false);
+            chatContent.appendChild(botMessageElement);
+            saveMessage(botResponse, false);
+            chatContent.scrollTop = chatContent.scrollHeight;
+            console.log("Bot response displayed and saved:", botResponse);
         });
 
         function toggleTheme() {
             const body = document.body;
             body.classList.toggle("dark-theme");
             body.classList.toggle("light-theme");
-            
             const isDark = body.classList.contains("dark-theme");
             setThemeProperties(isDark);
-            
-            // Save preference to localStorage
             localStorage.setItem('themePreference', isDark ? 'dark' : 'light');
             console.log("Theme switched to:", isDark ? "dark" : "light");
         }
 
-        // Initialize
         document.addEventListener("DOMContentLoaded", () => {
-            // Check for saved theme preference
             const savedTheme = localStorage.getItem('themePreference');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
             if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
                 document.body.classList.remove("dark-theme");
                 document.body.classList.add("light-theme");
             }
-            
-            // Set initial theme properties
             setThemeProperties(document.body.classList.contains("dark-theme"));
-            
-            // Focus input field
+
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    currentUser = user;
+                    currentSessionId = getOrCreateSessionId(user.uid);
+                    userStatus.textContent = user.displayName || user.email;
+                    logoutBtn.style.display = 'inline-block';
+                    loginModal.classList.add('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("User authenticated:", user.uid, "session:", currentSessionId);
+                } else {
+                    currentUser = null;
+                    currentSessionId = getOrCreateSessionId('guest');
+                    userStatus.textContent = 'Guest';
+                    logoutBtn.style.display = 'none';
+                    loginModal.classList.remove('hidden');
+                    updateHistoryList();
+                    loadSession(currentSessionId);
+                    console.log("No user authenticated, showing login modal, session:", currentSessionId);
+                }
+            });
+
             userInput.focus();
-            
-            console.log("Chat initialized");
+            console.log("Aayushi AI initialized, ready to vibe!");
+
+            if ('caches' in window) {
+                caches.keys().then(names => names.forEach(name => caches.delete(name)));
+            }
         });
 
-        // Allow sending with Shift+Enter for new line, Enter to send
         userInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
