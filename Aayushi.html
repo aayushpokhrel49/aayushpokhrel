@@ -491,18 +491,18 @@
         <div class="login-card">
             <h2 id="login-title">Sign In to Aayushi Chat</h2>
             <div class="login-tabs">
-                <div class="login-tab active" onclick="showSignIn()">Sign In</div>
-                <div class="login-tab" onclick="showCreateAccount()">Create Account</div>
+                <div class="login-tab active" id="sign-in-tab">Sign In</div>
+                <div class="login-tab" id="create-account-tab">Create Account</div>
             </div>
             <div id="auth-form">
                 <input type="email" id="email" placeholder="Enter email" autocomplete="off">
                 <input type="password" id="password" placeholder="Enter password" autocomplete="off">
-                <button class="auth-btn" id="auth-btn" onclick="handleSignIn()">Sign In</button>
+                <button class="auth-btn" id="auth-btn">Sign In</button>
             </div>
-            <button class="google-btn" id="google-btn" onclick="handleGoogleLogin()">
+            <button class="google-btn" id="google-btn">
                 <i class="fab fa-google"></i> Sign in with Google
             </button>
-            <button class="guest-btn" onclick="continueAsGuest()">Continue as Guest</button>
+            <button class="guest-btn" id="guest-btn">Continue as Guest</button>
         </div>
     </div>
     <div class="app">
@@ -513,13 +513,13 @@
             </div>
             <div class="header-actions">
                 <span class="user-status" id="user-status">Guest</span>
-                <button class="logout-btn" id="logout-btn" style="display: none;" onclick="handleLogout()">
+                <button class="logout-btn" id="logout-btn" style="display: none;">
                     <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
                 </button>
-                <button class="toggle" onclick="openHistory()" aria-label="View history">
+                <button class="toggle" id="history-toggle" aria-label="View history">
                     <i class="fas fa-history"></i>
                 </button>
-                <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <button class="toggle" id="theme-toggle" aria-label="Toggle theme">
                     <i class="fas fa-adjust"></i>
                 </button>
             </div>
@@ -535,14 +535,14 @@
             <div id="status-message" class="status-message"></div>
             <form id="chat-form" class="input-area">
                 <input type="text" id="user-input" placeholder="Type or speak your message..." autocomplete="off">
-                <button type="button" id="mic-btn" class="mic-btn" onclick="toggleSpeechRecognition()" aria-label="Toggle microphone">
+                <button type="button" id="mic-btn" class="mic-btn" aria-label="Toggle microphone">
                     <i class="fas fa-microphone"></i>
                 </button>
                 <button type="submit"><i class="fas fa-paper-plane"></i> <span>Send</span></button>
             </form>
         </div>
         <div class="history-sidebar" id="history-sidebar">
-            <button class="close-history" onclick="closeHistory()"><i class="fas fa-times"></i></button>
+            <button class="close-history" id="close-history"><i class="fas fa-times"></i></button>
             <h3><i class="fas fa-clock"></i> Chat History</h3>
             <div id="history-list"></div>
         </div>
@@ -574,12 +574,18 @@
         const loginTitle = document.getElementById("login-title");
         const authBtn = document.getElementById("auth-btn");
         const googleBtn = document.getElementById("google-btn");
+        const guestBtn = document.getElementById("guest-btn");
+        const signInTab = document.getElementById("sign-in-tab");
+        const createAccountTab = document.getElementById("create-account-tab");
         const historySidebar = document.getElementById("history-sidebar");
         const historyList = document.getElementById("history-list");
         const userStatus = document.getElementById("user-status");
         const logoutBtn = document.getElementById("logout-btn");
         const micBtn = document.getElementById("mic-btn");
         const statusMessage = document.getElementById("status-message");
+        const historyToggle = document.getElementById("history-toggle");
+        const themeToggle = document.getElementById("theme-toggle");
+        const closeHistoryBtn = document.getElementById("close-history");
 
         // OpenRouter API Key
         const OPENROUTER_API_KEY = "sk-or-v1-eedcf4f4e696e13c76f66078d783dd5184c2950b927e35f4151c7708e7075fb";
@@ -796,9 +802,9 @@
             isSignInMode = true;
             loginTitle.textContent = "Sign In to Aayushi Chat";
             authBtn.textContent = "Sign In";
-            authBtn.onclick = handleSignIn;
-            document.querySelectorAll('.login-tab')[0].classList.add('active');
-            document.querySelectorAll('.login-tab')[1].classList.remove('active');
+            authBtn.onclick = handleSignIn; // Update onclick for consistency
+            signInTab.classList.add('active');
+            createAccountTab.classList.remove('active');
             statusMessage.textContent = "";
         }
 
@@ -806,9 +812,9 @@
             isSignInMode = false;
             loginTitle.textContent = "Create Account";
             authBtn.textContent = "Create Account";
-            authBtn.onclick = handleCreateAccount;
-            document.querySelectorAll('.login-tab')[0].classList.remove('active');
-            document.querySelectorAll('.login-tab')[1].classList.add('active');
+            authBtn.onclick = handleCreateAccount; // Update onclick for consistency
+            signInTab.classList.remove('active');
+            createAccountTab.classList.add('active');
             statusMessage.textContent = "";
         }
 
@@ -1036,7 +1042,18 @@
             console.log("Theme switched to:", isDark ? "dark" : "light");
         }
 
-        // Chat Submission Handler
+        // Event Listeners
+        signInTab.addEventListener('click', showSignIn);
+        createAccountTab.addEventListener('click', showCreateAccount);
+        authBtn.addEventListener('click', () => isSignInMode ? handleSignIn() : handleCreateAccount());
+        googleBtn.addEventListener('click', handleGoogleLogin);
+        guestBtn.addEventListener('click', continueAsGuest);
+        logoutBtn.addEventListener('click', handleLogout);
+        historyToggle.addEventListener('click', openHistory);
+        themeToggle.addEventListener('click', toggleTheme);
+        closeHistoryBtn.addEventListener('click', closeHistory);
+        micBtn.addEventListener('click', toggleSpeechRecognition);
+
         chatForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             const userMessage = userInput.value.trim();
