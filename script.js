@@ -84,4 +84,37 @@ window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
 
 //newsletter 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevrx3TVECXNiNwRYHGwuNKWydokYuETqfgMA8687Pa-1ytVlGzA/exec';
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('.newsletter-form');
+        const messageDiv = document.createElement('div');
+        messageDiv.id = 'message';
+        messageDiv.style.display = 'none';
+        form.appendChild(messageDiv); // Add message below form
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network error');
+                return response.text(); // Use .text() instead of .json() for simpler setup
+            })
+            .then(result => {
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = 'green';
+                messageDiv.textContent = '✅ Thank you for subscribing!';
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = '❌ Error subscribing. Try again.';
+            });
+        });
+    });
