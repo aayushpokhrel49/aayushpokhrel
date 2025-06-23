@@ -84,38 +84,33 @@ window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
 
 //newsletter 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevrx3TVECXNiNwRYHGwuNKWydokYuETqfgMA8687Pa-1ytVlGzA/exec';
-const form = document.forms['submit'];
+  const form = document.querySelector(".newsletter-form");
+  const input = document.querySelector(".newsletter-input");
+  const message = document.getElementById("message");
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.querySelector('.newsletter-form');
-        const messageDiv = document.createElement('div');
-        messageDiv.id = 'message';
-        messageDiv.style.display = 'none';
-        form.appendChild(messageDiv); // Add message below form
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Stop form from reloading the page
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            
-            fetch(scriptURL, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Network error');
-                return response.text(); // Use .text() instead of .json() for simpler setup
-            })
-            .then(result => {
-                messageDiv.style.display = 'block';
-                messageDiv.style.color = 'green';
-                messageDiv.textContent = '✅ Thank you for subscribing!';
-                form.reset();
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                messageDiv.style.display = 'block';
-                messageDiv.style.color = 'red';
-                messageDiv.textContent = '❌ Error subscribing. Try again.';
-            });
-        });
+    const email = input.value;
+
+    const response = await fetch("https://sheetdb.io/api/v1/914mb27dqivnn", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        data: {
+          email: email
+        }
+      })
     });
+
+    if (response.ok) {
+      message.textContent = "✅ Email saved successfully!";
+      message.style.color = "green";
+      form.reset();
+    } else {
+      message.textContent = "❌ Failed to save email. Try again.";
+      message.style.color = "red";
+    }
+  });
