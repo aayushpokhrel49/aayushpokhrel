@@ -85,6 +85,7 @@ window.addEventListener('load', animateOnScroll);
 
 //newsletter 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevrx3TVECXNiNwRYHGwuNKWydokYuETqfgMA8687Pa-1ytVlGzA/exec';
+const form = document.forms['submit'];
 
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.querySelector('.newsletter-form');
