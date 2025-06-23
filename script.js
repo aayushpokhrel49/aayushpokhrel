@@ -89,33 +89,40 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevr
 const form = document.forms['submit'];
 const messageDiv = document.getElementById('message');
 
-if (form) {
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        fetch(scriptURL, { 
-            method: 'POST', 
-            body: new FormData(form)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success!', data);
-            messageDiv.style.display = 'block';
-            messageDiv.style.color = 'green';
-            messageDiv.textContent = 'Thank you for subscribing!';
-            form.reset();
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            messageDiv.style.display = 'block';
-            messageDiv.style.color = 'red';
-            messageDiv.textContent = 'Error subscribing. Please try again.';
+// Ensure the script runs after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (form) {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success!', data);
+                if (messageDiv) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = 'green';
+                    messageDiv.textContent = 'Thank you for subscribing!';
+                }
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                if (messageDiv) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = 'Error subscribing. Please try again.';
+                }
+            });
         });
-    });
-} else {
-    console.error('Form not found. Ensure the form has name="submit".');
-}
+    } else {
+        console.error('Form not found. Ensure the form has name="submit" and is loaded in the DOM.');
+    }
+});
