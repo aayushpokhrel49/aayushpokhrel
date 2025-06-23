@@ -84,33 +84,37 @@ window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
 
 //newsletter 
-  const form = document.querySelector(".newsletter-form");
-  const input = document.querySelector(".newsletter-input");
-  const message = document.getElementById("message");
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".newsletter-form");
+    const input = document.querySelector(".newsletter-input");
+    const message = document.getElementById("message");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Stop form from reloading the page
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const email = input.value;
+      const email = input.value;
 
-    const response = await fetch("https://sheetdb.io/api/v1/914mb27dqivnn", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        data: {
-          email: email
-        }
-      })
+      const response = await fetch("https://sheetdb.io/api/v1/914mb27dqivnn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: {
+            email: email
+          }
+        })
+      });
+
+      if (response.ok) {
+        message.textContent = "✅ Email saved successfully!";
+        message.style.color = "green";
+        form.reset();
+      } else {
+        message.textContent = "❌ Failed to save email.";
+        message.style.color = "red";
+      }
     });
-
-    if (response.ok) {
-      message.textContent = "✅ Email saved successfully!";
-      message.style.color = "green";
-      form.reset();
-    } else {
-      message.textContent = "❌ Failed to save email. Try again.";
-      message.style.color = "red";
-    }
   });
+</script>
