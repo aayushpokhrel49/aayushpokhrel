@@ -88,7 +88,7 @@ window.addEventListener('load', animateOnScroll);
 const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevrx3TVECXNiNwRYHGwuNKWydokYuETqfgMA8687Pa-1ytVlGzA/exec'
   const form = document.forms['newsletter-form']
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('newsletter-button', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => console.log('Success!', response))
