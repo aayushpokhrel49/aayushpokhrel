@@ -88,8 +88,7 @@ window.addEventListener('load', animateOnScroll);
 const scriptURL = 'https://script.google.com/macros/s/AKfycbw8V3iLtgvEA8tCbIwevrx3TVECXNiNwRYHGwuNKWydokYuETqfgMA8687Pa-1ytVlGzA/exec';
 const form = document.forms['submit'];
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
+form.addEventListener('submit';
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => console.log('Success!', response))
         .catch(error => console.error('Error!', error.message));
