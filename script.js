@@ -95,7 +95,7 @@ window.addEventListener('load', animateOnScroll);
 
       const email = input.value;
 
-      const response = await fetch("https://sheetdb.io/api/v1/914mb27dqivnn", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzwIKIETpP3RIVdADcJ75IUSUjVKYXPiBN5ND2JueMI_rFy5f9Bvwhp1AWuvoOuearqCw/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
