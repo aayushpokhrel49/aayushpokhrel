@@ -314,145 +314,164 @@
             color: var(--primary);
         }
 
-        /* Newsletter */
+        /* Newsletter Section */
         .newsletter-section {
             padding: 80px 5%;
             background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(243, 114, 165, 0.03) 100%);
+            margin: 50px 0;
+            text-align: center;
         }
 
         .newsletter-container {
             max-width: 800px;
             margin: 0 auto;
-            text-align: center;
+        }
+
+        .newsletter-description {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
         }
 
         .newsletter-form {
             display: flex;
             max-width: 500px;
-            margin: 30px auto 0;
+            margin: 0 auto;
+            position: relative;
         }
 
         .newsletter-input {
             flex: 1;
-            padding: 15px 20px;
-            border: 1px solid var(--light-gray);
-            border-radius: 50px 0 0 50px;
+            padding: 15px 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
             font-size: 1rem;
             outline: none;
             transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
         }
 
         .newsletter-input:focus {
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
         .newsletter-button {
-            padding: 15px 25px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 10px 20px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 0 50px 50px 0;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            min-width: 120px;
         }
 
         .newsletter-button:hover {
             background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateX(2px);
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 80px 5% 30px;
+        .newsletter-button.subscribing {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
+        /* Subscription Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
             left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--accent);
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
         }
 
-        .footer-column p {
-            margin-bottom: 20px;
-            color: var(--gray);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: var(--transition);
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .copyright {
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .modal p {
             color: var(--gray);
-            font-size: 0.9rem;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .modal-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
         }
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .fade-in {
@@ -462,6 +481,49 @@
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
+
+        /* Warning box styles */
+        .warning-box {
+            background-color: #fff8f8;
+            border-left: 4px solid #ff5252;
+            padding: 20px;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff5252;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h4 i {
+            font-size: 1.2rem;
+        }
+
+        /* Stats highlight */
+        .stat-highlight {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
 
         /* Mobile Menu */
         @media (max-width: 768px) {
@@ -525,52 +587,104 @@
             }
 
             .newsletter-button {
+                position: relative;
+                right: auto;
+                top: auto;
                 border-radius: 50px;
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
             }
         }
+        footer {
+    background-color: var(--dark);
+    color: white;
+    padding: 80px 5% 30px;
+}
 
-        /* Warning box styles */
-        .warning-box {
-            background-color: #fff8f8;
-            border-left: 4px solid #ff5252;
-            padding: 20px;
-            margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
-        }
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
 
-        .warning-box h4 {
-            color: #ff5252;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.footer-column h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
 
-        .warning-box h4 i {
-            font-size: 1.2rem;
-        }
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+}
 
-        /* Stats highlight */
-        .stat-highlight {
-            background-color: rgba(67, 97, 238, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 2rem 0;
-        }
+.footer-column p {
+    margin-bottom: 20px;
+    color: var(--gray);
+}
 
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 10px;
-        }
+.social-links {
+    display: flex;
+    gap: 15px;
+}
 
-        .stat-label {
-            font-size: 1.2rem;
-            color: var(--dark);
-        }
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--gray);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--gray);
+    font-size: 0.9rem;
+}
     </style>
 </head>
 <body>
@@ -728,8 +842,7 @@
         <div class="article-navigation">
             <a href="https://aayushhpokhrel.com.np/Getting%20Started%20with%20Web%20Animation" class="article-nav-link">
                 <i class="fas fa-arrow-left"></i>
-                <span>Previous:Getting Started with Web Animation
-</span>
+                <span>Previous: Getting Started with Web Animation</span>
             </a>
             <a href="#" class="article-nav-link" style="margin-left: auto; text-align: right;">
                 <span>Next: The Rise of Passwordless Authentication</span>
@@ -739,16 +852,29 @@
     </div>
 
     <!-- Newsletter Section -->
-    <section class="newsletter-section">
+    <section class="newsletter-section" id="newsletter">
         <div class="newsletter-container fade-in">
             <h2 class="section-title">Stay Informed About Cybersecurity</h2>
-            <p>Subscribe to receive the latest security updates and protection tips straight to your inbox.</p>
-            <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Your email address" required>
-                <button type="submit" class="newsletter-button">Subscribe</button>
+            <p class="newsletter-description">Subscribe to receive the latest security updates and protection tips straight to your inbox.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button" id="subscribe-btn">Subscribe</button>
             </form>
         </div>
     </section>
+
+    <!-- Subscription Success Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contact">
@@ -788,74 +914,164 @@
 
         <div class="copyright">
             <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
-<div class="footer-links">
+            <div class="footer-links">
                 <a href="./Privacy-policy">Privacy Policy</a>&nbsp;&nbsp;
                 <a href="./Terms-of-service">Terms of Service</a>
-                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Sticky Navigation
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Navigation
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
             }
-        });
 
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks) navLinks.classList.remove('active');
+                    if (hamburger) hamburger.classList.remove('active');
+                });
             });
-        });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
 
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.fade-in:not(.animated)');
+
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('animated');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+
+            // Newsletter Form Submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            const subscriptionModal = document.getElementById('subscription-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalButton = document.querySelector('.modal-button');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+
+            if (newsletterForm && subscribeBtn) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    
+                    // Simple validation
+                    const email = formData.get('data[email]');
+                    if (!email || !email.includes('@')) {
+                        alert('Please enter a valid email address');
+                        return;
+                    }
+                    
+                    // Show classic "Subscribing..." text animation
+                    const originalText = subscribeBtn.textContent;
+                    let dots = 0;
+                    subscribeBtn.textContent = 'Subscribing';
+                    subscribeBtn.disabled = true;
+                    subscribeBtn.classList.add('subscribing');
+                    
+                    const loadingInterval = setInterval(() => {
+                        dots = (dots + 1) % 4;
+                        subscribeBtn.textContent = 'Subscribing' + '.'.repeat(dots);
+                    }, 500);
+                    
+                    // Submit form data (using fetch API)
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        clearInterval(loadingInterval);
+                        if (response.ok) {
+                            // Show success modal
+                            if (subscriptionModal) subscriptionModal.style.display = 'block';
+                            // Reset form and button
+                            newsletterForm.reset();
+                            subscribeBtn.textContent = originalText;
+                            subscribeBtn.disabled = false;
+                            subscribeBtn.classList.remove('subscribing');
+                        } else {
+                            throw new Error('Network response was not ok');
+                        }
+                    })
+                    .catch(error => {
+                        clearInterval(loadingInterval);
+                        console.error('Error:', error);
+                        subscribeBtn.textContent = originalText;
+                        subscribeBtn.disabled = false;
+                        subscribeBtn.classList.remove('subscribing');
+                        alert('There was a problem with your submission. Please try again.');
                     });
+                });
+            }
+
+            // Close modal when clicking X or button
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            if (modalButton) {
+                modalButton.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === subscriptionModal) {
+                    subscriptionModal.style.display = 'none';
                 }
             });
         });
-
-        // Animation on scroll
-        const animateOnScroll = function() {
-            const elements = document.querySelectorAll('.fade-in:not(.animated)');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementPosition < windowHeight - 100) {
-                    element.classList.add('animated');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
