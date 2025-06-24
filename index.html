@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/Y7qyWXZv/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/Y7qyWXZv/favicon-16x16.png">
     <title>Aayush Pokhrel | Creative Blog</title>
     <meta name="description" content="Personal blog sharing insights on design, technology, and creative storytelling">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -55,7 +55,7 @@
                     <a href="https://aayushhpokhrel.com.np/The Future of UI Design in 2025" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
-            
+
             <!-- Post 2 -->
             <article class="post-card fade-in delay-2">
                 <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1470&q=80');">
@@ -68,7 +68,7 @@
                     <a href="https://aayushhpokhrel.com.np/Getting Started with Web Animation" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
-            
+
             <!-- Post 3 -->
             <article class="post-card fade-in delay-3">
                 <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80');">
@@ -88,13 +88,12 @@
     <section class="newsletter-section" id="newsletter">
         <div class="newsletter-container fade-in">
             <h2 class="section-title">Stay Updated</h2>
-            <p>Subscribe to my newsletter to receive the latest articles and exclusive content straight to your inbox.</p>
-<form action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
-  <input type="email" name="data[email]" placeholder="Your email address" required>
-  <button type="submit">Subscribe</button>
-</form>
-            
-  </div>
+            <p class="newsletter-description">Subscribe to my newsletter to receive the latest articles and exclusive content straight to your inbox.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" placeholder="Your email address" required class="newsletter-input">
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
     </section>
 
     <!-- About Section -->
@@ -122,7 +121,7 @@
                     <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
                 </div>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -133,7 +132,7 @@
                     <li><a href="./portfolio">Portfolio</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Contact</h3>
                 <p><i class="fas fa-envelope"></i> info@aayushhpokhrel.com.np</p>
@@ -142,12 +141,25 @@
         </div>
         <div class="copyright">
             <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
-<div class="footer-links">
+            <div class="footer-links">
                 <a href="./Privacy-policy">Privacy Policy</a>&nbsp;&nbsp;
                 <a href="./Terms-of-service">Terms of Service</a>
-                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Subscription Success Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
