@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Aayush Pokhrel</title>
+    <meta name="description" content="Technology and cybersecurity articles by Aayush Pokhrel">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --accent: #f72585;
+            --gray: #adb5bd;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 180px 5% 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover;
+            opacity: 0.1;
+        }
+
+        .blog-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .blog-hero p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 700px;
+            margin: 40px auto 0;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding-right: 60px;
+        }
+
+        .search-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            cursor: pointer;
+        }
+
+        /* Articles Grid */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        /* Article Card */
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            position: relative;
+            z-index: 0;
+        }
+
+        .article-content {
+            padding: 25px;
+            position: relative;
+            z-index: 0;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .article-meta i {
+            color: var(--accent);
+            margin-right: 5px;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .article-excerpt {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            background: var(--light-gray);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Newsletter */
+        .newsletter-widget {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 60px auto 0;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .page-link:hover, .page-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .blog-hero {
+                padding: 150px 5% 80px;
+            }
+
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .article-image {
+                height: 200px;
+            }
+
+            .newsletter-widget {
+                padding: 30px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-button {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .blog-hero {
+                padding: 130px 5% 60px;
+            }
+
+            .blog-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .blog-hero p {
+                font-size: 1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-content {
+                padding: 20px;
+            }
+
+            .article-title {
+                font-size: 1.3rem;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="./" class="logo">Aayush Pokhrel<span></span></a>
+            <ul class="nav-links">
+                <li><a href="./">Home</a></li>
+                <li><a href="./#blog" class="active">Blog</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./Social">Social</a></li>
+                <li><a href="./portfolio">Portfolio</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="blog-hero fade-in">
+        <h1>Technology & Cybersecurity Insights</h1>
+        <p>Exploring the latest trends in digital payments, cybersecurity, and emerging technologies</p>
+        
+        <div class="search-container delay-1">
+            <form action="#" method="get">
+                <input type="text" class="search-bar" placeholder="Search articles..." name="search">
+                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <div class="blog-container">
+        <div class="articles-grid">
+            <!-- Article 1 -->
+            <article class="article-card fade-in delay-1">
+                <a href="https://aayushhpokhrel.com.np/World's%20Largest%20Data%20Leak" class="article-link" aria-label="Read article about data leak"></a>
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cybersecurity" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> June 20, 2025</span>
+                        <span><i class="far fa-clock"></i> 10 min</span>
+                    </div>
+                    <h2 class="article-title">World's Largest Data Leak Exposes 16 Billion Passwords</h2>
+                    <p class="article-excerpt">In what cybersecurity experts are calling the largest data breach in history, a staggering 16 billion login credentials have been exposed online.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Cybersecurity</a>
+                        <a href="#" class="tag">Data Breach</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card fade-in delay-2">
+                <a href="https://aayushhpokhrel.com.np/Digital%20Payment%20Growth%20in%20Nepal" class="article-link" aria-label="Read article about digital payments"></a>
+                <img src="https://images.unsplash.com/photo-1613243555978-636c48dc653c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Digital Payments" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> June 24, 2025</span>
+                        <span><i class="far fa-clock"></i> 8 min</span>
+                    </div>
+                    <h2 class="article-title">Digital Payment Growth in Nepal: What's Next</h2>
+                    <p class="article-excerpt">Nepal has experienced a digital revolution in how people pay, receive, and manage money. But what's driving this growth?</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Fintech</a>
+                        <a href="#" class="tag">Nepal</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card fade-in delay-3">
+                <a href="#" class="article-link" aria-label="Read article about web development"></a>
+                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="UI/UX Design" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> May 15, 2025</span>
+                        <span><i class="far fa-clock"></i> 12 min</span>
+                    </div>
+                    <h2 class="article-title">The Future of UI/UX Design in 2025</h2>
+                    <p class="article-excerpt">Exploring the emerging technologies and frameworks that are shaping the future of UI/UX Design</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Web Dev</a>
+                        <a href="#" class="tag">UI/UX</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="article-card fade-in delay-1">
+                <a href="https://aayushhpokhrel.com.np/Getting%20Started%20with%20Web%20Animation" class="article-link" aria-label="Read article about AI"></a>
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1470&q=80" alt="Web animation" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> April 28, 2025</span>
+                        <span><i class="far fa-clock"></i> 9 min</span>
+                    </div>
+                    <h2 class="article-title">How AI is Transforming Cybersecurity</h2>
+                    <p class="article-excerpt">Artificial intelligence is revolutionizing how we protect digital assets, from threat detection to automated response systems.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">AI</a>
+                        <a href="#" class="tag">Security</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="article-card fade-in delay-2">
+                <a href="#" class="article-link" aria-label="Read article about blockchain"></a>
+                <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1132&q=80" alt="Blockchain" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> March 18, 2025</span>
+                        <span><i class="far fa-clock"></i> 7 min</span>
+                    </div>
+                    <h2 class="article-title">Blockchain Beyond Cryptocurrency</h2>
+                    <p class="article-excerpt">Exploring how blockchain technology is being used in supply chain, healthcare, voting systems, and more.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Blockchain</a>
+                        <a href="#" class="tag">Tech</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="article-card fade-in delay-3">
+                <a href="#" class="article-link" aria-label="Read article about UI/UX"></a>
+                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="UI/UX Design" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> February 10, 2025</span>
+                        <span><i class="far fa-clock"></i> 6 min</span>
+                    </div>
+                    <h2 class="article-title">The Psychology Behind Effective UI/UX</h2>
+                    <p class="article-excerpt">Understanding how cognitive psychology principles can create more intuitive user experiences.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Design</a>
+                        <a href="#" class="tag">UI/UX</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 7 -->
+            <article class="article-card fade-in delay-4">
+                <a href="#" class="article-link" aria-label="Read article about data science"></a>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Science" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> January 5, 2025</span>
+                        <span><i class="far fa-clock"></i> 11 min</span>
+                    </div>
+                    <h2 class="article-title">Data Science in Cybersecurity</h2>
+                    <p class="article-excerpt">How machine learning algorithms identify and prevent sophisticated cyber threats in real-time.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Data Science</a>
+                        <a href="#" class="tag">Security</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 8 -->
+            <article class="article-card fade-in delay-5">
+                <a href="#" class="article-link" aria-label="Read article about mobile payments"></a>
+                <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1178&q=80" alt="Mobile Apps" class="article-image">
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> December 15, 2024</span>
+                        <span><i class="far fa-clock"></i> 8 min</span>
+                    </div>
+                    <h2 class="article-title">The Evolution of Mobile Payment Security</h2>
+                    <p class="article-excerpt">From tokenization to biometric authentication: how mobile payment security has evolved.</p>
+                    <div class="article-tags">
+                        <a href="#" class="tag">Mobile</a>
+                        <a href="#" class="tag">Payments</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-widget fade-in delay-3">
+            <h3 class="newsletter-title">Stay Updated</h3>
+            <p class="newsletter-description">Subscribe to my newsletter to receive the latest articles and insights on technology and cybersecurity.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button" id="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Aayush</h3>
+                <p>Creative developer and writer sharing insights on design, technology, and the creative process.</p>
+                <div class="social-links">
+                    <a href="https://x.com/aayushpokhrel49?t=d4l3RAACProAyr8kI_NupQ&s=09" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/aayushpokhrel49?igsh=MXd6anZ5djFzZThtdg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/aayush-pokhrel-b71260365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/aayushpokhrel49" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="./">Home</a></li>
+                    <li><a href="./#blog">Blog</a></li>
+                    <li><a href="./about">About</a></li>
+                    <li><a href="./Social">Social</a></li>
+                    <li><a href="./portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="./Privacy-policy">Privacy Policy</a>
+                <span> | </span>
+                <a href="./Terms-of-service">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Sticky header on scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Newsletter form submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            const subscriptionModal = document.getElementById('subscription-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalButton = document.querySelector('.modal-button');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+
+            if (newsletterForm && subscribeBtn) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    
+                    // Validate email
+                    const email = formData.get('data[email]');
+                    if (!email || !email.includes('@')) {
+                        alert('Please enter a valid email address');
+                        return;
+                    }
+                    
+                    // Show loading animation
+                    const originalText = subscribeBtn.textContent;
+                    let dots = 0;
+                    subscribeBtn.textContent = 'Subscribing';
+                    subscribeBtn.disabled = true;
+                    subscribeBtn.classList.add('subscribing');
+                    
+                    const loadingInterval = setInterval(() => {
+                        dots = (dots + 1) % 4;
+                        subscribeBtn.textContent = 'Subscribing' + '.'.repeat(dots);
+                    }, 500);
+                    
+                    // Submit form data
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        clearInterval(loadingInterval);
+                        if (response.ok) {
+                            // Show success modal
+                            subscriptionModal.style.display = 'block';
+                            // Reset form
+                            newsletterForm.reset();
+                            subscribeBtn.textContent = originalText;
+                            subscribeBtn.disabled = false;
+                            subscribeBtn.classList.remove('subscribing');
+                        } else {
+                            throw new Error('Subscription failed');
+                        }
+                    })
+                    .catch(error => {
+                        clearInterval(loadingInterval);
+                        console.error('Error:', error);
+                        subscribeBtn.textContent = originalText;
+                        subscribeBtn.disabled = false;
+                        subscribeBtn.classList.remove('subscribing');
+                        alert('There was a problem with your subscription. Please try again.');
+                    });
+                });
+            }
+
+            // Close modal
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    subscriptionModal.style.display = 'none';
+                });
+            }
+
+            if (modalButton) {
+                modalButton.addEventListener('click', function() {
+                    subscriptionModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === subscriptionModal) {
+                    subscriptionModal.style.display = 'none';
+                }
+            });
+
+            // Make tags and read more links clickable despite the overlay
+            document.querySelectorAll('.tag, .read-more').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.href) {
+                        window.location.href = this.href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
