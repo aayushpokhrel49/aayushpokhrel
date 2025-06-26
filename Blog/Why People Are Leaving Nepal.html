@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why People Are Leaving Nepal | Aayush Pokhrel</title>
+    <meta name="description" content="A deep look into the modern migration trend of Nepalis settling abroad">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/JWrZSFkB/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/Rkg49X16/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/kgX1Yt4G/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" herf="https://i.ibb.co/xtmRPPDj/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="48x48" herf="favicon.png">
+<link rel="manifest" href="site.webmanifest">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --accent: #f72585;
+            --gray: #adb5bd;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 150px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-meta-item i {
+            color: var(--primary);
+        }
+
+        .article-featured-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1.2rem;
+            color: var(--secondary);
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+
+        .article-content ul, 
+        .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-content a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Article Footer */
+        .article-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 40px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .article-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .article-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            max-width: 45%;
+        }
+
+        .article-nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .article-nav-link i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(243, 114, 165, 0.03) 100%);
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .newsletter-description {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .newsletter-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            min-width: 120px;
+        }
+
+        .newsletter-button:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateX(2px);
+        }
+
+        .newsletter-button.subscribing {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+        }
+
+        /* Subscription Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .modal-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Warning box styles */
+        .warning-box {
+            background-color: #fff8f8;
+            border-left: 4px solid #ff5252;
+            padding: 20px;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff5252;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h4 i {
+            font-size: 1.2rem;
+        }
+
+        /* Stats highlight */
+        .stat-highlight {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        /* Table styles */
+        .article-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .article-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .article-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .article-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .article-table tr:nth-child(even) {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .article-table tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        /* Personal story cards */
+        .story-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
+        }
+
+        .story-card p {
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .story-card .author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .article-featured-image {
+                height: 300px;
+            }
+
+            .article-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .article-nav-link {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-button {
+                position: relative;
+                right: auto;
+                top: auto;
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
+
+            .article-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="./" class="logo">Aayush Pokhrel<span></span></a>
+            <ul class="nav-links">
+                <li><a href="./">Home</a></li>
+                <li><a href="./blog">Blog</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./Social">Social Media</a></li>
+                <li><a href="./portfolio">Portfolio</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <article class="article-header fade-in">
+        <span class="article-category">Society</span>
+        <h1 class="article-title">Why People Are Leaving Nepal and Settling Abroad: A Deep Look into the Modern Migration Trend</h1>
+        <div class="article-meta">
+            <div class="article-meta-item">
+                <i class="far fa-user"></i>
+                <span>Aayush Pokhrel</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>June 26, 2025</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-clock"></i>
+                <span>10 min read</span>
+            </div>
+        </div>
+        <img src="https://www.investopaper.com/wp-content/uploads/2019/01/Foreign-Employment.jpg" alt="Nepali migration trend" class="article-featured-image">
+    </article>
+
+    <!-- Article Content -->
+    <div class="article-content">
+        <p>In recent years, the phenomenon of people leaving Nepal and settling abroad is a multifaceted issue driven by a combination of economic, social, educational, and personal factors. Over the years, international migration from Nepal has grown significantly, with many individuals seeking better opportunities beyond their homeland.</p>
+
+        <h2>1. Economic Factors: The Primary Driver</h2>
+        <p>Poverty, unemployment, and underemployment are among the most significant push factors prompting Nepalis to migrate. Despite some economic progress, Nepal continues to grapple with high youth unemployment and limited job opportunities, especially in the formal sector. Low wages and poor working conditions further discourage young people from staying. Many opt to work abroad where they can earn higher incomes, improve their living standards, and support their families back home through remittances. In fact, remittances have become a cornerstone of Nepal's economy, contributing significantly to GDP and household incomes.</p>
+
+        <ul>
+            <li>Low Salary Structure</li>
+            <li>Minimal industrial development</li>
+            <li>Scarce Private Industry jobs</li>
+        </ul>
+
+        <div class="stat-highlight fade-in delay-1">
+            <div class="stat-number">28%</div>
+            <div class="stat-label">of Nepal's GDP comes from remittances</div>
+        </div>
+
+        <h2>2. Quality of Life & Basic Services</h2>
+        <p>For many, the decision to settle abroad is driven by the desire for a better life not just income, but access to quality healthcare, public services, and law enforcement.</p>
+
+        <ul>
+            <li><b>Weak healthcare system:</b> Lack of hospitals, doctors, and medical facilities, especially in rural areas.</li>
+            <li><b>Unemployment:</b> Few job opportunities and low wages push people to seek work abroad.</li>
+            <li><b>Poor infrastructure: </b>Unreliable electricity, bad roads, and limited internet affect daily life and business.</li>
+            <li><b>Low-quality education</b>: Schools and colleges often lack resources and trained teachers.</li>
+        </ul>
+
+        <p>In contrast, Nepal continues to struggle with inconsistent infrastructure, political instability, and corruption all of which push people toward more stable nations.</p>
+
+        <img src="https://encdn.ratopati.com/media/news/tourism_AByN9YWGJN.jpg" alt="Nepal infrastructure challenges">
+
+        <h2>3. Education and Career Prospects</h2>
+        <p>Nepal's education system, while improving, still lacks the quality and global recognition that many students seek. As a result, an increasing number of young Nepalis are migrating for higher education and better career prospects abroad. This trend is particularly noticeable among those pursuing technical and professional degrees such as medicine, engineering, and management. Once these students complete their education, many choose to stay in their host countries to find employment, leading to a brain drain for Nepal.</p>
+
+        <div class="story-card fade-in delay-2">
+            <p>"After studying engineering for 4 years, I earned less than a call center job abroad. It made no sense to stay."</p>
+            <div class="author">– A Nepalese Student from Australia</div>
+        </div>
+
+        <h2>4. Personal and Social Motivations</h2>
+        <p>Beyond economic and educational reasons, personal motivations also play a role in migration decisions. Marriage, family reunification, and personal aspirations are key non-economic drivers of migration. For instance, some women migrate after marrying someone residing abroad, while others move to join family members who have already settled overseas. Additionally, modern facilities, better infrastructure, and perceived quality of life in foreign countries attract many Nepalis to settle abroad permanently.</p>
+
+        <h2>5. Political and Social Instability</h2>
+        <p>Nepal's history of political instability, frequent changes in government, and slow policy implementation have created an environment of uncertainty. Issues like corruption, lack of rule of law, and weak governance further deter investment and development, pushing citizens to look elsewhere for stability and security. Moreover, the uneven distribution of resources across different regions of Nepal has resulted in localized deprivation, encouraging migration from rural to urban areas and eventually abroad.</p>
+
+        <div class="stat-highlight fade-in delay-3">
+            <div class="stat-number">1.5 Million</div>
+            <div class="stat-label">Nepalis working abroad officially (actual numbers likely higher)</div>
+        </div>
+
+        <h2>6. Cultural and Psychological Dimensions</h2>
+        <p>Migration from Nepal is not about economics it is also shaped by cultural values and societal expectations. There is a growing perception among youth that success and prestige are tied to living or working abroad. This "migration culture" is reinforced by stories of relatives or community members who have found financial success overseas, creating a cycle of aspiration and emulation. However, this often leads to emotional challenges, including loneliness and separation from family, especially for elderly parents left behind.</p>
+
+        <h2>7. Environmental and Geographical Factors</h2>
+        <p>Nepal's rugged terrain and vulnerability to natural disasters such as earthquakes and landslides also influence migration patterns. People living in remote or disaster-prone areas may find it difficult to sustain livelihoods, prompting them to relocate to safer and more prosperous regions outside the country.</p>
+
+        <h3>Personal Stories from Nepali Migrants</h3>
+        <p>To understand the mindset of today's Nepali youth, we reached out to several individuals who have settled or worked abroad. Their responses reflect deep frustration and a strong desire for dignity and opportunity.</p>
+
+        <div class="story-card">
+            <p>"I had a master's degree, but the only job I got in Nepal paid Rs. 15,000. In Australia, I earned that in a few hours."</p>
+            <div class="author">– A student turned PR holder in Melbourne</div>
+        </div>
+
+        <div class="story-card">
+            <p>"I loved teaching in Nepal, but I couldn't feed my family. Now I clean offices in Dubai, but at least I can save something every month."</p>
+            <div class="author">– Former school teacher, now migrant worker</div>
+        </div>
+
+        <div class="story-card">
+            <p>"We waited years for government service exams. When the vacancy finally came, it was filled with connections. That's when I gave up and moved abroad."</p>
+            <div class="author">– A frustrated PSC aspirant, now in Canada</div>
+        </div>
+
+        <div class="story-card">
+            <p>"As a nurse, I always wanted to help people. But hospitals in Nepal are understaffed, underpaid, and unsafe. Working in the UK gave me dignity and respect."</p>
+            <div class="author">– Registered nurse in Manchester</div>
+        </div>
+
+        <div class="story-card">
+            <p>"Life abroad is not as easy as it looks on Instagram, but at least I see progress. Back home, we were just surviving."</p>
+            <div class="author">– A nurse living in the UK</div>
+        </div>
+
+        <div class="story-card">
+            <p>"My dream was to be a software engineer in Nepal. But startups don't pay enough. Now I'm working remotely for a US company from Portugal."</p>
+            <div class="author">– IT graduate from Kathmandu</div>
+        </div>
+
+        <div class="story-card">
+            <p>"People said I'd come back in a year. It's been 7 years. My kids now speak more English than Nepali."</p>
+            <div class="author">– Nepali mother settled in USA</div>
+        </div>
+
+        <div class="warning-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Brain Drain Concern</h4>
+            <p>The mass migration of skilled professionals is creating a significant brain drain for Nepal, with sectors like healthcare and IT being particularly affected. This exodus of talent could have long-term consequences for the country's development.</p>
+        </div>
+
+        <h2>Conclusion</h2>
+        <p>In summary, the decision of Nepalis to leave their country and settle abroad is influenced by a complex interplay of economic hardship, limited educational and career opportunities, personal aspirations, political instability, and cultural trends. While migration brings benefits such as remittance inflows and exposure to global experiences, it also poses challenges like brain drain and social fragmentation. Addressing the root causes will require comprehensive policy interventions, improved governance, and sustained investment in human capital development to make Nepal a more attractive place to live and work.</p>
+    </div>
+
+    <!-- Article Footer -->
+    <div class="article-footer">
+        <div class="article-tags">
+            <a href="#" class="article-tag">Migration</a>
+            <a href="#" class="article-tag">Nepal</a>
+            <a href="#" class="article-tag">Economy</a>
+            <a href="#" class="article-tag">Society</a>
+        </div>
+
+        <div class="article-navigation">
+            <a href="https://aayushhpokhrel.com.np/Digital%20Payment%20Growth%20in%20Nepal" class="article-nav-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Digital Payment Growth in Nepal</span>
+            </a>
+            <a href="#" class="article-nav-link" style="margin-left: auto; text-align: right;">
+                <span>Next: The Nepali Diaspora's Impact</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container fade-in">
+            <h2 class="section-title">Stay Updated on Social Trends</h2>
+            <p class="newsletter-description">Subscribe to receive the latest updates on migration patterns and socio-economic issues in Nepal.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button" id="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Subscription Success Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Aayush</h3>
+                <p>Creative designer and writer sharing insights on design, technology, and the creative process.</p>
+                <div class="social-links">
+                    <a href="https://x.com/aayushpokhrel49?t=d4l3RAACProAyr8kI_NupQ&s=09" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/aayushpokhrel49?igsh=MXd6anZ5djFzZThtdg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/aayush-pokhrel-b71260365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/aayushpokhrel49" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="./">Home</a></li>
+                    <li><a href="./blog">Blog</a></li>
+                    <li><a href="./about">About</a></li>
+                    <li><a href="./Social">Social media</a></li>
+                    <li><a href="./portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="https://www.worldbank.org/en/country/nepal" target="_blank">World Bank Nepal</a></li>
+                    <li><a href="https://ratopati.com/" target="_blank">Rato Pati</a></li>
+                    <li><a href="https://www.investopaper.com/" target="_blank">Investopaper</a></li>
+                    <li><a href="https://www.dofe.gov.np/" target="_blank">Department of Foreign Employment</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="./Privacy-policy">Privacy Policy</a>&nbsp;&nbsp;
+                <a href="./Terms-of-service">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Navigation
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks) navLinks.classList.remove('active');
+                    if (hamburger) hamburger.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.fade-in:not(.animated)');
+
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('animated');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+
+            // Newsletter Form Submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            const subscriptionModal = document.getElementById('subscription-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalButton = document.querySelector('.modal-button');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+
+            if (newsletterForm && subscribeBtn) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(this);
+
+                    // Simple validation
+                    const email = formData.get('data[email]');
+                    if (!email || !email.includes('@')) {
+                        alert('Please enter a valid email address');
+                        return;
+                    }
+
+                    // Show classic "Subscribing..." text animation
+                    const originalText = subscribeBtn.textContent;
+                    let dots = 0;
+                    subscribeBtn.textContent = 'Subscribing';
+                    subscribeBtn.disabled = true;
+                    subscribeBtn.classList.add('subscribing');
+
+                    const loadingInterval = setInterval(() => {
+                        dots = (dots + 1) % 4;
+                        subscribeBtn.textContent = 'Subscribing' + '.'.repeat(dots);
+                    }, 500);
+
+                    // Submit form data (using fetch API)
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        clearInterval(loadingInterval);
+                        if (response.ok) {
+                            // Show success modal
+                            if (subscriptionModal) subscriptionModal.style.display = 'block';
+                            // Reset form and button
+                            newsletterForm.reset();
+                            subscribeBtn.textContent = originalText;
+                            subscribeBtn.disabled = false;
+                            subscribeBtn.classList.remove('subscribing');
+                        } else {
+                            throw new Error('Network response was not ok');
+                        }
+                    })
+                    .catch(error => {
+                        clearInterval(loadingInterval);
+                        console.error('Error:', error);
+                        subscribeBtn.textContent = originalText;
+                        subscribeBtn.disabled = false;
+                        subscribeBtn.classList.remove('subscribing');
+                        alert('There was a problem with your submission. Please try again.');
+                    });
+                });
+            }
+
+            // Close modal when clicking X or button
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            if (modalButton) {
+                modalButton.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === subscriptionModal) {
+                    subscriptionModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
