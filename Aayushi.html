@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Aayushi AI Chat</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/JWrZSFkB/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/Rkg49X16/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/kgX1Yt4G/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" herf="https://i.ibb.co/xtmRPPDj/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes=512x512" herf="https://i.ibb.co/7x25kkFq/android-chrome-512x512.png"
+<link rel="icon" type="image/png" sizes="48x48" herf="https://raw.githubusercontent.com/aayushpokhrel49/aayushpokhrel/refs/heads/main/favicon.png">
+<link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -39,7 +46,7 @@
             --radius: 14px;
             --radius-sm: 8px;
             --radius-lg: 18px;
-            --spacing: 18px;
+            --spacing: 16px;
             --header-height: 70px;
             --input-height: 60px;
             --gradient: linear-gradient(135deg, #6c5ce7 0%, #00cec9 100%);
@@ -59,9 +66,6 @@
             background: var(--gradient);
             padding: 0 var(--spacing);
             height: var(--header-height);
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
             color: white;
             position: relative;
             box-shadow: var(--shadow);
@@ -78,6 +82,7 @@
             background: linear-gradient(to right, #fff, #d3d3ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-size: 1.3rem;
         }
         .header-actions { display: flex; align-items: center; gap: 12px; }
         .toggle {
@@ -148,9 +153,9 @@
         #chat-content::-webkit-scrollbar { width: 8px; }
         #chat-content::-webkit-scrollbar-track { background: transparent; }
         #chat-content::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
-        .message {
-            max-width: 80%;
-            padding: 16px 20px;
+        .chat-message {
+            max-width: 85%;
+            padding: 14px 18px;
             border-radius: var(--radius);
             animation: slideIn 0.3s ease-out;
             position: relative;
@@ -173,18 +178,84 @@
             border: 1px solid var(--divider);
         }
         .image-message {
-            max-width: 80%;
-            padding: 16px 20px;
-            background: var(--message-bot);
-            color: var(--text);
+            max-width: 85%;
             margin-right: auto;
-            border-radius: var(--radius);
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
             border: 1px solid var(--divider);
+            border-radius: var(--radius);
+            cursor: pointer;
         }
-        .image-message img {
-            max-width: 100%;
-            border-radius: var(--radius-sm);
-            margin-top: 10px;
+        .image-download-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm) 0 0 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .image-download-btn:hover {
+            background: var(--primary);
+        }
+        .large-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 30;
+            padding: var(--spacing);
+        }
+        .large-image-container img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: var(--radius);
+        }
+        .large-image-download-btn {
+            position: absolute;
+            bottom: calc(var(--spacing) * 2);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .large-image-download-btn:hover {
+            background: var(--primary-dark);
+        }
+        .large-image-close-btn {
+            position: absolute;
+            top: calc(var(--spacing) * 2);
+            right: calc(var(--spacing) * 2);
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .large-image-close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
         .message-time {
             font-size: 0.7rem;
@@ -192,7 +263,7 @@
             margin-top: 6px;
             text-align: right;
         }
-        .bot-message .message-time, .image-message .message-time { color: var(--text-light); }
+        .bot-message .message-time { color: var(--text-light); }
         .user-message .message-time { color: rgba(255, 255, 255, 0.7); }
         .typing-indicator {
             display: flex;
@@ -216,15 +287,18 @@
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
         .input-area {
             display: flex;
+            flex-direction: column;
             gap: 12px;
             padding: 12px;
             background: var(--card);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
-            align-items: center;
             border: 1px solid var(--divider);
-            min-height: var(--input-height);
-            flex-wrap: wrap;
+        }
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
         .input-area input {
             flex: 1;
@@ -236,8 +310,7 @@
             outline: none;
             font-size: 0.95rem;
             transition: var(--transition);
-            min-height: 48px;
-            min-width: 200px;
+            min-height: 50px;
         }
         .input-area input::placeholder { color: var(--text-light); opacity: 0.7; }
         .input-area input:focus { box-shadow: 0 0 0 2px var(--primary); }
@@ -255,14 +328,14 @@
             justify-content: center;
             gap: 8px;
             min-width: 90px;
-            height: 48px;
+            height: 50px;
         }
         .input-area button:hover { background: var(--primary-dark); transform: translateY(-2px); }
         .input-area button:active { transform: translateY(0); }
         .input-area button:disabled { background: var(--text-light); cursor: not-allowed; }
         .mic-btn {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -275,6 +348,12 @@
         }
         .mic-btn:hover { background: var(--primary); color: white; }
         .mic-btn.recording { background: var(--accent); color: white; animation: pulse 1.5s infinite; }
+        .image-btn {
+            background: var(--secondary);
+            width: 100%;
+            justify-content: center;
+        }
+        .image-btn:hover { background: #0ca678; }
         .status-message {
             font-size: 0.85rem;
             color: var(--text-light);
@@ -466,40 +545,112 @@
         @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes typingAnimation { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(253, 121, 168, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(253, 121, 168, 0); } 100% { box-shadow: 0 0 0 0 rgba(253, 121, 168, 0); } }
+
+        /* Responsive Styles */
         @media (max-width: 480px) {
-            :root { --spacing: 12px; --header-height: 60px; --input-height: 56px; }
-            .header { font-size: 1rem; padding: var(--spacing); }
+            :root { 
+                --spacing: 12px; 
+                --header-height: 60px; 
+                --radius: 12px;
+                --radius-lg: 16px;
+            }
+            .header { padding: var(--spacing); }
             .header-logo { gap: 8px; }
             .logo-icon { font-size: 1.4rem; }
+            .logo-text { font-size: 1.1rem; }
             .toggle { width: 36px; height: 36px; font-size: 0.9rem; }
             .chat-container { padding: var(--spacing); }
-            #chat-content { padding: calc(var(--spacing) - 2px); margin-bottom: calc(var(--spacing) - 2px); }
-            .message, .image-message { max-width: 90%; padding: 12px 16px; font-size: 0.85rem; }
-            .input-area { padding: 8px; gap: 8px; flex-wrap: wrap; }
-            .input-area input { padding: 12px 14px; font-size: 0.85rem; min-width: 100%; }
-            .input-area button { padding: 12px 14px; min-width: 48px; font-size: 0.85rem; width: 48px; height: 48px; }
+            #chat-content { 
+                padding: calc(var(--spacing) - 2px); 
+                margin-bottom: calc(var(--spacing) - 2px); 
+                gap: 12px;
+            }
+            .chat-message, .image-message { 
+                max-width: 90%; 
+                padding: 12px 16px; 
+                font-size: 0.85rem; 
+            }
+            .image-message { 
+                height: 200px;
+                max-width: 100%;
+            }
+            .input-area { 
+                padding: 8px; 
+                gap: 8px; 
+            }
+            .input-row { gap: 6px; }
+            .input-area input { 
+                padding: 12px 14px; 
+                font-size: 0.85rem; 
+                min-height: 46px;
+            }
+            .input-area button { 
+                padding: 12px 14px; 
+                min-width: auto;
+                font-size: 0.85rem; 
+                height: 46px;
+            }
             .input-area button span { display: none; }
             .input-area button i { margin: 0; }
+            .mic-btn { 
+                width: 46px; 
+                height: 46px; 
+            }
             .history-sidebar { width: 100%; }
-            .login-card { max-width: 90%; padding: var(--spacing); }
+            .login-card { 
+                max-width: 90%; 
+                padding: var(--spacing); 
+            }
             .user-status { max-width: 100px; }
-            .logout-btn { padding: 6px 10px; font-size: 0.8rem; }
+            .logout-btn { 
+                padding: 6px 10px; 
+                font-size: 0.8rem; 
+            }
+            .logout-btn span { display: none; }
         }
+
         @media (min-width: 481px) and (max-width: 768px) {
-            :root { --spacing: 14px; --header-height: 65px; }
-            .header { font-size: 1.1rem; padding: var(--spacing); }
+            :root { 
+                --spacing: 14px; 
+                --header-height: 65px; 
+            }
+            .header { padding: var(--spacing); }
             .logo-icon { font-size: 1.5rem; }
             .toggle { width: 38px; height: 38px; }
             .chat-container { padding: var(--spacing); }
             #chat-content { padding: calc(var(--spacing) - 2px); }
-            .message, .image-message { max-width: 85%; padding: 14px 16px; font-size: 0.9rem; }
+            .chat-message, .image-message { 
+                max-width: 85%; 
+                padding: 14px 16px; 
+                font-size: 0.9rem; 
+            }
+            .image-message { 
+                height: 250px;
+            }
             .input-area { padding: 10px; gap: 10px; }
-            .input-area input { padding: 12px 16px; font-size: 0.9rem; }
-            .input-area button { padding: 12px 16px; min-width: 60px; font-size: 0.9rem; }
+            .input-row { gap: 8px; }
+            .input-area input { 
+                padding: 12px 16px; 
+                font-size: 0.9rem; 
+            }
+            .input-area button { 
+                padding: 12px 16px; 
+                min-width: auto;
+                font-size: 0.9rem; 
+            }
             .history-sidebar { width: 280px; }
         }
-        @media (min-width: 769px) and (max-width: 1024px) { .chat-container { padding: var(--spacing); } .message, .image-message { max-width: 75%; } }
-        @media (min-width: 1025px) { .chat-container { padding: var(--spacing); } .message, .image-message { max-width: 70%; } }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .chat-container { padding: var(--spacing); }
+            .chat-message, .image-message { max-width: 75%; }
+            .image-message { height: 280px; }
+        }
+
+        @media (min-width: 1025px) {
+            .chat-container { padding: var(--spacing); }
+            .chat-message, .image-message { max-width: 70%; }
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -543,24 +694,25 @@
         <div class="chat-container">
             <div id="chat-content">
                 <div class="welcome-message">Welcome to Aayushi AI Assistant. How can I help you today?</div>
-                <div class="message bot-message">
+                <div class="chat-message bot-message">
                     <div class="markdown-content">Hi there! 👋 I'm Aayushi, your AI assistant. I'm here to help with any questions you have. What would you like to know?</div>
                     <div class="message-time">Just now</div>
                 </div>
             </div>
             <div id="status-message" class="status-message"></div>
             <form id="chat-form" class="input-area">
-                <input type="text" id="user-input" placeholder="Type or speak your message..." autocomplete="off">
-                <button type="button" id="mic-btn" class="mic-btn" aria-label="Toggle microphone">
-                    <i class="fas fa-microphone"></i>
+                <div class="input-row">
+                    <input type="text" id="chat-input" placeholder="Type or speak your message..." autocomplete="off">
+                    <button type="button" id="mic-btn" class="mic-btn" aria-label="Toggle microphone">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button type="submit" id="send-button" class="send-btn">
+                        <i class="fas fa-paper-plane"></i> <span>Send</span>
+                    </button>
+                </div>
+                <button type="button" id="image-btn" class="image-btn">
+                    <i class="fas fa-image"></i> <span>Generate Image</span>
                 </button>
-                <button type="button" id="image-btn" aria-label="Generate image">
-                    <i class="fas fa-image"></i> <span>Image</span>
-                </button>
-                <button type="button" id="deepthink-btn" aria-label="DeepThink mode">
-                    <i class="fas fa-brain"></i> <span>DeepThink</span>
-                </button>
-                <button type="submit"><i class="fas fa-paper-plane"></i> <span>Send</span></button>
             </form>
         </div>
         <div class="history-sidebar" id="history-sidebar">
@@ -569,7 +721,7 @@
             <div id="history-list"></div>
         </div>
     </div>
-    <script src="https://js.puter.com/v2/"></script>
+
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
         import { 
@@ -589,7 +741,9 @@
         // DOM Elements
         const chatContent = document.getElementById("chat-content");
         const chatForm = document.getElementById("chat-form");
-        const userInput = document.getElementById("user-input");
+        const chatInput = document.getElementById("chat-input");
+        const sendButton = document.getElementById("send-button");
+        const imageBtn = document.getElementById("image-btn");
         const loginModal = document.getElementById("login-modal");
         const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("password");
@@ -605,8 +759,6 @@
         const userStatus = document.getElementById("user-status");
         const logoutBtn = document.getElementById("logout-btn");
         const micBtn = document.getElementById("mic-btn");
-        const imageBtn = document.getElementById("image-btn");
-        const deepthinkBtn = document.getElementById("deepthink-btn");
         const statusMessage = document.getElementById("status-message");
         const historyToggle = document.getElementById("history-toggle");
         const themeToggle = document.getElementById("theme-toggle");
@@ -682,20 +834,43 @@
             document.documentElement.style.setProperty('--divider', isDark ? 'var(--dark-divider)' : 'var(--light-divider)');
         }
 
-        function createMessageElement(message, fromUser, timestamp = new Date(), isImage = false, imageSrc = null) {
+        function createMessageElement(message, isUser, timestamp = new Date(), isImage = false, imageUrl = null) {
             const messageElement = document.createElement("div");
-            messageElement.classList.add("message", fromUser ? "user-message" : isImage ? "image-message" : "bot-message");
-            let formattedMessage = message;
-            if (!isImage && (message.includes('```') || message.includes('`') || message.includes('*') || message.includes('_'))) {
-                formattedMessage = `<div class="markdown-content">${formatMarkdown(message)}</div>`;
+            messageElement.classList.add("chat-message", isUser ? "user-message" : isImage ? "image-message" : "bot-message");
+            
+            if (isImage && imageUrl) {
+                messageElement.style.backgroundImage = `url(${imageUrl})`;
+                const downloadButton = document.createElement("button");
+                downloadButton.className = "image-download-btn";
+                downloadButton.innerHTML = '<i class="fas fa-download"></i>';
+                downloadButton.onclick = (e) => {
+                    e.stopPropagation();
+                    downloadImage(imageUrl);
+                };
+                messageElement.appendChild(downloadButton);
+                messageElement.onclick = (e) => {
+                    e.stopPropagation();
+                    displayLargeImage(imageUrl);
+                };
             } else {
-                formattedMessage = `<div>${message}</div>`;
+                let formattedMessage = message;
+                if (!isImage && (message.includes('```') || message.includes('`') || message.includes('*') || message.includes('_'))) {
+                    formattedMessage = `<div class="markdown-content">${formatMarkdown(message)}</div>`;
+                } else {
+                    formattedMessage = `<div>${message}</div>`;
+                }
+                messageElement.innerHTML = `${formattedMessage}<div class="message-time">${formatTime(new Date(timestamp))}</div>`;
             }
-            if (isImage && imageSrc) {
-                formattedMessage += `<img src="${imageSrc}" alt="Generated Image">`;
-            }
-            messageElement.innerHTML = `${formattedMessage}<div class="message-time">${formatTime(new Date(timestamp))}</div>`;
             return messageElement;
+        }
+
+        function downloadImage(imageUrl) {
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = 'aayushi-ai-generated-image.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         function formatMarkdown(text) {
@@ -720,92 +895,81 @@
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kathmandu' });
         }
 
-        async function fetchResponse(message) {
-            if (!window.puter || !window.puter.ai || !window.puter.ai.chat) {
-                console.error("Puter.js SDK not loaded or chat function unavailable");
-                statusMessage.textContent = "Error: AI service not available. Please try again later.";
-                return "Oops, my AI service isn't responding. Check your network or try again later! 😅";
-            }
-            const typingIndicator = createTypingIndicator();
-            chatContent.appendChild(typingIndicator);
-            chatContent.scrollTop = chatContent.scrollHeight;
-            try {
-                console.log("Sending chat request to Puter.js:", message);
-                const response = await puter.ai.chat(message);
-                console.log("Chat response received:", response);
-                if (!response) {
-                    throw new Error("Empty response from AI service");
+        function displayLargeImage(imageUrl) {
+            const largeImageContainer = document.createElement('div');
+            largeImageContainer.className = 'large-image-container';
+            largeImageContainer.onclick = (e) => {
+                if (e.target === largeImageContainer) {
+                    largeImageContainer.remove();
                 }
-                return response;
-            } catch (error) {
-                console.error("Puter.js chat error:", error.message);
-                statusMessage.textContent = `Chat error: ${error.message}. Try again!`;
-                return `Oops, my circuits got tangled! 😅 You said "${message}", and I'm like, "Let's try that again!" (Error: ${error.message})`;
-            } finally {
-                if (chatContent.contains(typingIndicator)) chatContent.removeChild(typingIndicator);
-            }
+            };
+            
+            const largeImage = document.createElement('img');
+            largeImage.src = imageUrl;
+            largeImage.className = 'max-w-full max-h-full rounded-lg';
+            
+            const downloadLargeButton = document.createElement("button");
+            downloadLargeButton.innerHTML = "Download Image";
+            downloadLargeButton.className = "large-image-download-btn";
+            downloadLargeButton.onclick = (e) => {
+                e.stopPropagation();
+                downloadImage(imageUrl);
+            };
+            
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '<i class="fas fa-times"></i>';
+            closeButton.className = 'large-image-close-btn';
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                largeImageContainer.remove();
+            };
+            
+            largeImageContainer.appendChild(largeImage);
+            largeImageContainer.appendChild(downloadLargeButton);
+            largeImageContainer.appendChild(closeButton);
+            document.body.appendChild(largeImageContainer);
         }
 
-        async function generateImage(prompt) {
-            if (!window.puter || !window.puter.ai || !window.puter.ai.txt2img) {
-                console.error("Puter.js SDK not loaded or txt2img function unavailable");
-                statusMessage.textContent = "Error: Image generation service not available. Please try again later.";
-                return "Oops, my image generation service isn't responding. Check your network or try again later! 😅";
+        async function callApi(apiUrl, prompt, prependPersona = false) {
+            if (prependPersona) {
+                prompt = "Follow instructions precisely! If the user asks to generate, create or make an image, photo, or picture by describing it, You will reply with '/image' + description. Otherwise, You will respond normally. Avoid additional explanations." + prompt;
             }
+            
+            chatInput.value = apiUrl.includes("image-generation-api") ? "Generating..." : "Typing...";
+            chatInput.disabled = true;
+            sendButton.disabled = true;
+            imageBtn.disabled = true;
+            
             const typingIndicator = createTypingIndicator();
             chatContent.appendChild(typingIndicator);
             chatContent.scrollTop = chatContent.scrollHeight;
+            
             try {
-                console.log("Sending image generation request to Puter.js:", prompt);
-                const imageElement = await puter.ai.txt2img(prompt);
-                const imageUrl = imageElement.src;
-                console.log("Image generated:", imageUrl);
-                return imageUrl;
-            } catch (error) {
-                console.error("Puter.js image generation error:", error.message);
-                statusMessage.textContent = `Image generation error: ${error.message}. Try again!`;
-                return `Error generating image: ${error.message}`;
-            } finally {
-                if (chatContent.contains(typingIndicator)) chatContent.removeChild(typingIndicator);
-            }
-        }
-
-        async function deepThinkResponse(message) {
-            if (!window.puter || !window.puter.ai || !window.puter.ai.chat) {
-                console.error("Puter.js SDK not loaded or chat function unavailable for DeepThink");
-                statusMessage.textContent = "Error: DeepThink service not available. Please try again later.";
-                return "Oops, my DeepThink service isn't responding. Check your network or try again later! 😅";
-            }
-            const typingIndicator = createTypingIndicator();
-            chatContent.appendChild(typingIndicator);
-            chatContent.scrollTop = chatContent.scrollHeight;
-            try {
-                console.log("Starting DeepThink for:", message);
-                statusMessage.textContent = "Aayushi is thinking deeply...";
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                const response = await puter.ai.chat(message, { stream: true });
-                let fullResponse = '';
-                for await (const part of response) {
-                    if (part?.text) {
-                        fullResponse += part.text;
-                        const tempElement = createMessageElement(fullResponse, false);
-                        const existingResponse = chatContent.querySelector('.bot-message:last-child');
-                        if (existingResponse) {
-                            chatContent.removeChild(existingResponse);
-                        }
-                        chatContent.appendChild(tempElement);
-                        chatContent.scrollTop = chatContent.scrollHeight;
-                    }
+                console.log(`Sending API request to ${apiUrl}:`, prompt);
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                
+                const data = await response.json();
+                console.log(`API response from ${apiUrl}:`, data);
+                
+                if (!data || data.status !== 'success') {
+                    throw new Error(data?.error || 'Invalid response from API');
                 }
-                console.log("DeepThink response completed:", fullResponse);
-                return fullResponse;
+                return data;
             } catch (error) {
-                console.error("Puter.js DeepThink error:", error.message);
-                statusMessage.textContent = `DeepThink error: ${error.message}. Try again!`;
-                return `Error in DeepThink mode: ${error.message}`;
+                console.error(`API error (${apiUrl}):`, error.message);
+                statusMessage.textContent = `Error: ${error.message}. Please try again!`;
+                return { status: 'error', error: error.message };
             } finally {
-                statusMessage.textContent = "";
+                chatInput.value = "";
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                imageBtn.disabled = false;
                 if (chatContent.contains(typingIndicator)) chatContent.removeChild(typingIndicator);
+                chatInput.focus();
             }
         }
 
@@ -821,11 +985,19 @@
             return null;
         }
 
-        function saveMessage(message, fromUser, sessionId = currentSessionId, isImage = false, imageSrc = null) {
+        function saveMessage(message, isUser, sessionId = currentSessionId, isImage = false, imageUrl = null) {
             const userId = currentUser ? currentUser.uid : 'guest';
             if (!chatHistory[userId]) chatHistory[userId] = {};
             if (!chatHistory[userId][sessionId]) chatHistory[userId][sessionId] = [];
-            chatHistory[userId][sessionId].push({ message, fromUser, timestamp: new Date().toISOString(), isImage, imageSrc });
+            
+            chatHistory[userId][sessionId].push({ 
+                message, 
+                isUser, 
+                timestamp: new Date().toISOString(), 
+                isImage, 
+                imageUrl 
+            });
+            
             try {
                 localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
                 console.log("Message saved to localStorage for user:", userId, "session:", sessionId);
@@ -833,26 +1005,31 @@
                 console.error("Error saving to localStorage:", error.message);
                 statusMessage.textContent = "Error saving chat history!";
             }
+            
             updateHistory();
         }
 
         function loadSession(sessionId, userId = currentUser ? currentUser.uid : 'guest') {
             chatContent.innerHTML = '';
+            
             if (chatHistory[userId] && chatHistory[userId][sessionId]) {
                 chatHistory[userId][sessionId].forEach(msg => {
-                    chatContent.appendChild(createMessageElement(msg.message, msg.fromUser, msg.timestamp, msg.isImage, msg.imageSrc));
+                    chatContent.appendChild(
+                        createMessageElement(msg.message, msg.isUser, msg.timestamp, msg.isImage, msg.imageUrl)
+                    );
                 });
                 console.log("Loaded session:", sessionId, "for user:", userId);
             } else {
                 chatContent.innerHTML = `
                     <div class="welcome-message">Welcome to Aayushi AI Assistant. How can I help you today?</div>
-                    <div class="message bot-message">
+                    <div class="chat-message bot-message">
                         <div class="markdown-content">Hi there! 👋 I'm Aayushi, your AI assistant. I'm here to help with any questions you have. What would you like to know?</div>
                         <div class="message-time">${formatTime(new Date())}</div>
                     </div>
                 `;
                 console.log("No history found for session:", sessionId, "starting new session.");
             }
+            
             chatContent.scrollTop = chatContent.scrollHeight;
             currentSessionId = sessionId;
             updateHistory();
@@ -861,23 +1038,35 @@
         function updateHistory() {
             historyList.innerHTML = '';
             const userId = currentUser ? currentUser.uid : 'guest';
+            
             if (chatHistory[userId] && Object.keys(chatHistory[userId]).length > 0) {
                 Object.keys(chatHistory[userId]).reverse().forEach(sessionId => {
                     const item = document.createElement('div');
                     item.classList.add('history-item');
                     if (sessionId === currentSessionId) item.classList.add('active');
+                    
                     const firstMessage = chatHistory[userId][sessionId][0]?.message || 'Empty chat';
                     item.textContent = firstMessage.slice(0, 30) + (firstMessage.length > 30 ? '...' : '');
                     item.title = firstMessage;
-                    item.onclick = () => { loadSession(sessionId); closeHistory(); };
+                    
+                    item.onclick = () => { 
+                        loadSession(sessionId); 
+                        closeHistory(); 
+                    };
+                    
                     historyList.appendChild(item);
                 });
             } else {
                 const emptyState = document.createElement('div');
                 emptyState.classList.add('empty-state');
-                emptyState.innerHTML = `<i class="fas fa-comment-slash"></i><p>No chat history yet</p><small>Start a conversation to see it here</small>`;
+                emptyState.innerHTML = `
+                    <i class="fas fa-comment-slash"></i>
+                    <p>No chat history yet</p>
+                    <small>Start a conversation to see it here</small>
+                `;
                 historyList.appendChild(emptyState);
             }
+            
             console.log("Updated history list for user:", userId);
         }
 
@@ -918,19 +1107,24 @@
         async function handleSignIn() {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
+            
             if (!email || !password) {
                 statusMessage.textContent = "Please fill in both email and password!";
                 return;
             }
+            
             disableAuthButtons();
+            
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 currentUser = userCredential.user;
                 currentSessionId = getOrCreateSessionId(currentUser.uid);
+                
                 userStatus.textContent = currentUser.email;
                 logoutBtn.style.display = 'inline-flex';
                 loginModal.classList.add('hidden');
                 statusMessage.textContent = "";
+                
                 updateHistory();
                 loadSession(currentSessionId);
                 console.log("User signed in:", currentUser.uid, "session:", currentSessionId);
@@ -943,6 +1137,7 @@
                     case 'auth/invalid-credential': errorMsg = "Invalid credentials!"; break;
                     default: errorMsg = error.message;
                 }
+                
                 statusMessage.textContent = errorMsg;
                 console.error("Sign-in error:", error.code, error.message);
             } finally {
@@ -953,21 +1148,26 @@
         async function handleCreateAccount() {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
+            
             if (!email || !password) {
                 statusMessage.textContent = "Please fill in both email and password!";
                 return;
             }
+            
             disableAuthButtons();
+            
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 currentUser = userCredential.user;
                 currentSessionId = getOrCreateSessionId(currentUser.uid);
+                
                 userStatus.textContent = currentUser.email;
                 logoutBtn.style.display = 'inline-flex';
                 loginModal.classList.add('hidden');
                 updateHistory();
                 loadSession(currentSessionId);
                 statusMessage.textContent = "";
+                
                 console.log("Account created and signed in:", currentUser.uid, "session:", currentSessionId);
             } catch (error) {
                 let errorMsg = "Account creation failed!";
@@ -977,6 +1177,7 @@
                     case 'auth/weak-password': errorMsg = "Password is too weak (minimum 6 characters)!"; break;
                     default: errorMsg = error.message;
                 }
+                
                 statusMessage.textContent = errorMsg;
                 console.error("Account creation error:", error.code, error.message);
             } finally {
@@ -986,6 +1187,7 @@
 
         async function handleGoogleLogin() {
             disableAuthButtons();
+            
             try {
                 let result;
                 try {
@@ -999,14 +1201,17 @@
                         throw popupError;
                     }
                 }
+                
                 currentUser = result.user;
                 currentSessionId = getOrCreateSessionId(currentUser.uid);
+                
                 userStatus.textContent = currentUser.displayName || currentUser.email;
                 logoutBtn.style.display = 'inline-flex';
                 loginModal.classList.add('hidden');
                 updateHistory();
                 loadSession(currentSessionId);
                 statusMessage.textContent = "";
+                
                 console.log("User logged in with Google:", currentUser.uid, "session:", currentSessionId);
             } catch (error) {
                 let errorMsg = "Google login failed!";
@@ -1015,6 +1220,7 @@
                 } else {
                     errorMsg = error.message;
                 }
+                
                 statusMessage.textContent = errorMsg;
                 console.error("Google login error:", error.code, error.message);
             } finally {
@@ -1025,12 +1231,14 @@
         function continueAsGuest() {
             currentUser = null;
             currentSessionId = getOrCreateSessionId('guest');
+            
             userStatus.textContent = 'Guest';
             logoutBtn.style.display = 'none';
             loginModal.classList.add('hidden');
             updateHistory();
             loadSession(currentSessionId);
             statusMessage.textContent = "";
+            
             console.log("Continuing as guest, session:", currentSessionId);
         }
 
@@ -1038,14 +1246,17 @@
             try {
                 if (currentUser) localStorage.removeItem(`session_${currentUser.uid}`);
                 await signOut(auth);
+                
                 currentUser = null;
                 currentSessionId = getOrCreateSessionId('guest');
+                
                 userStatus.textContent = 'Guest';
                 logoutBtn.style.display = 'none';
                 loginModal.classList.remove('hidden');
                 updateHistory();
                 loadSession(currentSessionId);
                 statusMessage.textContent = "";
+                
                 console.log("Logged out, back to guest mode, session:", currentSessionId);
             } catch (error) {
                 statusMessage.textContent = `Logout error: ${error.message}`;
@@ -1070,32 +1281,38 @@
                 micBtn.disabled = true;
                 return;
             }
+            
             if (!recognition) {
                 recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
                 recognition.lang = 'en-US';
                 recognition.interimResults = true;
                 recognition.continuous = false;
+                
                 recognition.onstart = () => {
                     isRecognizing = true;
                     micBtn.classList.add('recording');
                     statusMessage.textContent = "I'm all ears... what's the vibe? 🎙️";
                     console.log("Speech recognition started");
                 };
+                
                 recognition.onresult = (event) => {
                     const transcript = Array.from(event.results).map(result => result[0].transcript).join('');
-                    userInput.value = transcript;
+                    chatInput.value = transcript;
                     console.log("Speech recognition interim result:", transcript);
+                    
                     if (event.results[0].isFinal) {
                         recognition.stop();
                         chatForm.dispatchEvent(new Event('submit'));
                     }
                 };
+                
                 recognition.onerror = (event) => {
                     isRecognizing = false;
                     micBtn.classList.remove('recording');
                     statusMessage.textContent = `Whoops, mic trouble: ${event.error}. Try again? 😅`;
                     console.error("Speech recognition error:", event.error);
                 };
+                
                 recognition.onend = () => {
                     isRecognizing = false;
                     micBtn.classList.remove('recording');
@@ -1103,6 +1320,7 @@
                     console.log("Speech recognition ended");
                 };
             }
+            
             if (isRecognizing) {
                 recognition.stop();
             } else {
@@ -1119,9 +1337,11 @@
             const body = document.body;
             body.classList.toggle("dark-theme");
             body.classList.toggle("light-theme");
+            
             const isDark = body.classList.contains("dark-theme");
             setThemeProperties(isDark);
             localStorage.setItem('themePreference', isDark ? 'dark' : 'light');
+            
             console.log("Theme switched to:", isDark ? "dark" : "light");
         }
 
@@ -1139,38 +1359,112 @@
 
         chatForm.addEventListener("submit", async (event) => {
             event.preventDefault();
+            
             if (isProcessing) {
                 console.log("Chat request blocked: another request is processing");
                 return;
             }
-            const userMessage = userInput.value.trim();
-            if (!userMessage) {
+            
+            const message = chatInput.value.trim();
+            if (!message) {
                 statusMessage.textContent = "Please enter a message!";
                 console.log("Empty message, ignoring");
                 return;
             }
+            
             isProcessing = true;
             chatForm.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            const userMessageElement = createMessageElement(userMessage, true);
+            
+            const userMessageElement = createMessageElement(message, true);
             chatContent.appendChild(userMessageElement);
-            saveMessage(userMessage, true);
-            userInput.value = "";
+            saveMessage(message, true);
             chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("User message displayed and saved:", userMessage);
-            const customResponse = getCustomResponse(userMessage);
-            let botResponse;
+            
+            console.log("User message displayed and saved:", message);
+            
+            const customResponse = getCustomResponse(message);
             if (customResponse) {
                 await new Promise(resolve => setTimeout(resolve, 500));
-                botResponse = customResponse;
-                console.log("Using custom response:", botResponse);
-            } else {
-                botResponse = await fetchResponse(userMessage);
+                
+                const botMessageElement = createMessageElement(customResponse, false);
+                chatContent.appendChild(botMessageElement);
+                saveMessage(customResponse, false);
+                chatContent.scrollTop = chatContent.scrollHeight;
+                
+                console.log("Custom response displayed and saved:", customResponse);
+                isProcessing = false;
+                chatForm.querySelectorAll('button').forEach(btn => btn.disabled = false);
+                return;
             }
-            const botMessageElement = createMessageElement(botResponse, false);
-            chatContent.appendChild(botMessageElement);
-            saveMessage(botResponse, false);
-            chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("Bot response displayed and saved:", botResponse);
+            
+            const apiUrl = message.toLowerCase().startsWith('/image') 
+                ? 'https://backend.buildpicoapps.com/aero/run/image-generation-api?pk=v1-Z0FBQUFBQm9ZU1FFaWJCcmZ4MF81dWNEQmpBSFV2aVZ3OEFvaTRuNUhEMFZzbmlLNXA0WjdfZWd3OXI1ZzBPeW1xMU5iLVlWR3I4SXRuTU1XSHppNENXcjd5cjFWTWpoY3c9PQ=='
+                : 'https://backend.buildpicoapps.com/aero/run/llm-api?pk=v1-Z0FBQUFBQm9ZU1FFaWJCcmZ4MF81dWNEQmpBSFV2aVZ3OEFvaTRuNUhEMFZzbmlLNXA0WjdfZWd3OXI1ZzBPeW1xMU5iLVlWR3I4SXRuTU1XSHppNENXcjd5cjFWTWpoY3c9PQ==';
+            
+            const prompt = message.toLowerCase().startsWith('/image') ? message.substring(6).trim() : message;
+            
+            try {
+                const prependPersona = apiUrl.includes('llm-api');
+                const data = await callApi(apiUrl, prompt, prependPersona);
+                
+                if (data.status === 'success') {
+                    if (apiUrl.includes('image-generation-api')) {
+                        const imageMessageElement = createMessageElement('', false, new Date(), true, data.imageUrl);
+                        chatContent.appendChild(imageMessageElement);
+                        saveMessage(`Generated image for: ${prompt}`, false, currentSessionId, true, data.imageUrl);
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                        console.log("Image displayed and saved:", data.imageUrl);
+                    } else {
+                        if (data.text.trim().toLowerCase().startsWith('/image')) {
+                            const imageDescription = data.text.substring(data.text.toLowerCase().indexOf('/image') + 6).trim();
+                            const imageData = await callApi(
+                                'https://backend.buildpicoapps.com/aero/run/image-generation-api?pk=v1-Z0FBQUFBQm9ZU1FFaWJCcmZ4MF81dWNEQmpBSFV2aVZ3OEFvaTRuNUhEMFZzbmlLNXA0WjdfZWd3OXI1ZzBPeW1xMU5iLVlWR3I4SXRuTU1XSHppNENXcjd5cjFWTWpoY3c9PQ==', 
+                                imageDescription, 
+                                false
+                            );
+                            
+                            if (imageData.status === 'success') {
+                                const imageMessageElement = createMessageElement('', false, new Date(), true, imageData.imageUrl);
+                                chatContent.appendChild(imageMessageElement);
+                                saveMessage(`Generated image for: ${imageDescription}`, false, currentSessionId, true, imageData.imageUrl);
+                                chatContent.scrollTop = chatContent.scrollHeight;
+                                console.log("Image displayed and saved from text response:", imageData.imageUrl);
+                            } else {
+                                const errorMessageElement = createMessageElement(
+                                    `Error generating image: ${imageData.error || 'Unknown error'}`, 
+                                    false
+                                );
+                                chatContent.appendChild(errorMessageElement);
+                                saveMessage(`Error generating image: ${imageData.error || 'Unknown error'}`, false);
+                                console.error("Image generation error:", imageData.error);
+                            }
+                        } else {
+                            const botMessageElement = createMessageElement(data.text, false);
+                            chatContent.appendChild(botMessageElement);
+                            saveMessage(data.text, false);
+                            chatContent.scrollTop = chatContent.scrollHeight;
+                            console.log("Text response displayed and saved:", data.text);
+                        }
+                    }
+                } else {
+                    const errorMessageElement = createMessageElement(
+                        `Error: ${data.error || 'Unknown error'}`, 
+                        false
+                    );
+                    chatContent.appendChild(errorMessageElement);
+                    saveMessage(`Error: ${data.error || 'Unknown error'}`, false);
+                    console.error("API error:", data.error);
+                }
+            } catch (error) {
+                const errorMessageElement = createMessageElement(
+                    `Error: ${error.message}`, 
+                    false
+                );
+                chatContent.appendChild(errorMessageElement);
+                saveMessage(`Error: ${error.message}`, false);
+                console.error("Request error:", error.message);
+            }
+            
             isProcessing = false;
             chatForm.querySelectorAll('button').forEach(btn => btn.disabled = false);
         });
@@ -1180,59 +1474,61 @@
                 console.log("Image request blocked: another request is processing");
                 return;
             }
-            const userPrompt = userInput.value.trim();
-            if (!userPrompt) {
+            
+            // Automatically prepend "/image" to the input field
+            if (!chatInput.value.trim().startsWith('/image')) {
+                chatInput.value = `/image ${chatInput.value.trim()}`;
+            }
+            
+            const prompt = chatInput.value.trim();
+            if (!prompt || prompt === '/image') {
                 statusMessage.textContent = "Please enter an image description!";
                 console.log("Empty image prompt, ignoring");
                 return;
             }
+            
             isProcessing = true;
             chatForm.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            const userMessageElement = createMessageElement(`Generate image: ${userPrompt}`, true);
+            
+            const userMessageElement = createMessageElement(prompt, true);
             chatContent.appendChild(userMessageElement);
-            saveMessage(`Generate image: ${userPrompt}`, true);
-            userInput.value = "";
+            saveMessage(prompt, true);
             chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("Image generation requested:", userPrompt);
-            const imageUrl = await generateImage(userPrompt);
-            if (imageUrl.startsWith('Error')) {
-                const errorMessageElement = createMessageElement(imageUrl, false);
+            
+            console.log("Image generation requested:", prompt);
+            
+            try {
+                const data = await callApi(
+                    'https://backend.buildpicoapps.com/aero/run/image-generation-api?pk=v1-Z0FBQUFBQm9ZU1FFaWJCcmZ4MF81dWNEQmpBSFV2aVZ3OEFvaTRuNUhEMFZzbmlLNXA0WjdfZWd3OXI1ZzBPeW1xMU5iLVlWR3I4SXRuTU1XSHppNENXcjd5cjFWTWpoY3c9PQ==',
+                    prompt.substring(6).trim(), // Remove "/image" for the API call
+                    false
+                );
+                
+                if (data.status === 'success') {
+                    const imageMessageElement = createMessageElement('', false, new Date(), true, data.imageUrl);
+                    chatContent.appendChild(imageMessageElement);
+                    saveMessage(`Generated image for: ${prompt.substring(6).trim()}`, false, currentSessionId, true, data.imageUrl);
+                    chatContent.scrollTop = chatContent.scrollHeight;
+                    console.log("Image displayed and saved:", data.imageUrl);
+                } else {
+                    const errorMessageElement = createMessageElement(
+                        `Error generating image: ${data.error || 'Unknown error'}`, 
+                        false
+                    );
+                    chatContent.appendChild(errorMessageElement);
+                    saveMessage(`Error generating image: ${data.error || 'Unknown error'}`, false);
+                    console.error("Image generation error:", data.error);
+                }
+            } catch (error) {
+                const errorMessageElement = createMessageElement(
+                    `Error generating image: ${error.message}`, 
+                    false
+                );
                 chatContent.appendChild(errorMessageElement);
-                saveMessage(imageUrl, false);
-            } else {
-                const imageMessageElement = createMessageElement(`Generated image for: "${userPrompt}"`, false, new Date(), true, imageUrl);
-                chatContent.appendChild(imageMessageElement);
-                saveMessage(`Generated image for: "${userPrompt}"`, false, currentSessionId, true, imageUrl);
+                saveMessage(`Error generating image: ${error.message}`, false);
+                console.error("Image generation error:", error.message);
             }
-            chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("Image response processed:", imageUrl);
-            isProcessing = false;
-            chatForm.querySelectorAll('button').forEach(btn => btn.disabled = false);
-        });
-
-        deepthinkBtn.addEventListener("click", async () => {
-            if (isProcessing) {
-                console.log("DeepThink request blocked: another request is processing");
-                return;
-            }
-            const userMessage = userInput.value.trim();
-            if (!userMessage) {
-                statusMessage.textContent = "Please enter a question for DeepThink!";
-                console.log("Empty DeepThink prompt, ignoring");
-                return;
-            }
-            isProcessing = true;
-            chatForm.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            const userMessageElement = createMessageElement(`DeepThink: ${userMessage}`, true);
-            chatContent.appendChild(userMessageElement);
-            saveMessage(`DeepThink: ${userMessage}`, true);
-            userInput.value = "";
-            chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("DeepThink requested:", userMessage);
-            const botResponse = await deepThinkResponse(userMessage);
-            saveMessage(botResponse, false);
-            chatContent.scrollTop = chatContent.scrollHeight;
-            console.log("DeepThink response processed:", botResponse);
+            
             isProcessing = false;
             chatForm.querySelectorAll('button').forEach(btn => btn.disabled = false);
         });
@@ -1243,41 +1539,46 @@
                 if (user) {
                     currentUser = user;
                     currentSessionId = getOrCreateSessionId(user.uid);
+                    
                     userStatus.textContent = user.displayName || user.email;
                     logoutBtn.style.display = 'inline-flex';
                     loginModal.classList.add('hidden');
                     updateHistory();
                     loadSession(currentSessionId);
+                    
                     console.log("User authenticated:", user.uid, "session:", currentSessionId);
                 } else {
                     currentUser = null;
                     currentSessionId = getOrCreateSessionId('guest');
+                    
                     userStatus.textContent = 'Guest';
                     logoutBtn.style.display = 'none';
                     loginModal.classList.remove('hidden');
                     updateHistory();
                     loadSession(currentSessionId);
+                    
                     console.log("No user authenticated, showing login modal, session:", currentSessionId);
                 }
             });
+            
             const savedTheme = localStorage.getItem('themePreference');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
             if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
                 document.body.classList.remove("dark-theme");
                 document.body.classList.add("light-theme");
             }
+            
             setThemeProperties(document.body.classList.contains("dark-theme"));
-            userInput.focus();
-            console.log("Aayushi AI initialized, checking Puter.js SDK...");
-            if (!window.puter) {
-                console.error("Puter.js SDK failed to load");
-                statusMessage.textContent = "Warning: AI services may not work. Please check your network.";
+            chatInput.focus();
+            
+            if ('caches' in window) {
+                caches.keys().then(names => names.forEach(name => caches.delete(name)));
             }
-            if ('caches' in window) caches.keys().then(names => names.forEach(name => caches.delete(name)));
         });
 
         // Handle Enter Key
-        userInput.addEventListener('keydown', (e) => {
+        chatInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 chatForm.dispatchEvent(new Event('submit'));
