@@ -1,1 +1,242 @@
-photos
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot with Image Generation & DeepThink</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #response-area {
+            min-height: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            border-radius: 4px;
+        }
+        #image-output {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #image-output img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Chatbot</h1>
+    <div id="chat-container">
+        <div id="response-area"></div>
+        <div class="input-group">
+            <input type="text" id="user-input" placeholder="Ask a question or describe an image...">
+            <button onclick="sendChat()">Send Chat</button>
+            <button onclick="generateImage()">Generate Image</button>
+            <button onclick="deepThink()">DeepThink</button>
+        </div>
+        <div class="input-group">
+            <input type="text" id="image-url" placeholder="Enter image URL for analysis (optional)">
+            <button onclick="analyzeImage()">Analyze Image</button>
+        </div>
+        <div id="image-output"></div>
+        <div id="error" class="error"></div>
+    </div>
+
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        const responseArea = document.getElementById('response-area');
+        const userInput = document.getElementById('user-input');
+        const imageUrlInput = document.getElementById('image-url');
+        const imageOutput = document.getElementById('image-output');
+        const errorDiv = document.getElementById('error');
+        let isProcessing = false;
+
+        // Display text in the response area
+        function displayResponse(text, append = false) {
+            if (append) {
+                responseArea.innerHTML += `<p>${text}</p>`;
+            } else {
+                responseArea.innerHTML = `<p>${text}</p>`;
+            }
+            responseArea.scrollTop = responseArea.scrollHeight;
+        }
+
+        // Display error messages
+        function displayError(message) {
+            errorDiv.textContent = message;
+            setTimeout(() => errorDiv.textContent = '', 5000);
+        }
+
+        // Disable/enable buttons during processing
+        function toggleButtons(disabled) {
+            document.querySelectorAll('button').forEach(btn => btn.disabled = disabled);
+            isProcessing = disabled;
+        }
+
+        // Send a chat message
+        async function sendChat() {
+            if (isProcessing) return;
+            const query = userInput.value.trim();
+            if (!query) {
+                displayError('Please enter a question or prompt.');
+                return;
+            }
+
+            toggleButtons(true);
+            try {
+                const response = await puter.ai.chat(query);
+                displayResponse(response);
+                userInput.value = '';
+            } catch (error) {
+                displayError('Error fetching response: ' + error.message);
+            }
+            toggleButtons(false);
+        }
+
+        // Generate an image
+        async function generateImage() {
+            if (isProcessing) return;
+            const prompt = userInput.value.trim();
+            if (!prompt) {
+                displayError('Please enter an image description.');
+                return;
+            }
+
+            toggleButtons(true);
+            try {
+                const imageElement = await puter.ai.txt2img(prompt);
+                imageOutput.innerHTML = '';
+                imageOutput.appendChild(imageElement);
+                displayResponse(`Generated image for: "${prompt}"`);
+                userInput.value = '';
+            } catch (error) {
+                displayError('Error generating image: ' + error.message);
+            }
+            toggleButtons(false);
+        }
+
+        // Analyze an image
+        async function analyzeImage() {
+            if (isProcessing) return;
+            const imageUrl = imageUrlInput.value.trim();
+            if (!imageUrl) {
+                displayError('Please enter an image URL.');
+                return;
+            }
+
+            toggleButtons(true);
+            try {
+                const response = await puter.ai.chat("What do you see in this image?", imageUrl);
+                displayResponse(response);
+                imageUrlInput.value = '';
+            } catch (error) {
+                displayError('Error analyzing image: ' + error.message);
+            }
+            toggleButtons(false);
+        }
+
+        // Simulate DeepThink mode with iterative response
+        async function deepThink() {
+            if (isProcessing) return;
+            const query = userInput.value.trim();
+            if (!query) {
+                displayError('Please enter a question for DeepThink.');
+                return;
+            }
+
+            toggleButtons(true);
+            displayResponse('DeepThink processing...', false);
+
+            try {
+                // Simulate thinking with a delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Stream response for detailed queries
+                const response = await puter.ai.chat(query, { stream: true });
+                let fullResponse = '';
+                for await (const part of response) {
+                    if (part?.text) {
+                        fullResponse += part.text;
+                        displayResponse(fullResponse, true);
+                    }
+                }
+                userInput.value = '';
+            } catch (error) {
+                displayError('Error in DeepThink mode: ' + error.message);
+            }
+            toggleButtons(false);
+        }
+
+        // Handle Enter key for chat
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !isProcessing) {
+                sendChat();
+            }
+        });
+
+        imageUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !isProcessing) {
+                analyzeImage();
+            }
+        });
+    </script>
+</body>
+</html>
