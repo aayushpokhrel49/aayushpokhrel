@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybercrime in Nepal: Are We Prepared for the Growing Threats | Aayush Pokhrel</title>
+    <meta name="description" content="Examining the alarming rise of cybercrime in Nepal and the urgent need for stronger cybersecurity measures">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Cybercrime in Nepal: Are We Prepared for the Growing Threats">
+    <meta property="og:description" content="Examining the alarming rise of cybercrime in Nepal and the urgent need for stronger cybersecurity measures">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aayushhpokhrel.com.np/blog/cybercrime-in-nepal">
+    <meta property="og:image" content="https://i.ibb.co/ynF2DpLT/eeb8fd10-a6a0-4a6a-b8e6-a5018068e31a.png">
+    <meta property="og:site_name" content="Aayush Pokhrel">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/JWrZSFkB/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/Rkg49X16/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/kgX1Yt4G/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" herf="https://i.ibb.co/xtmRPPDj/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" herf="https://i.ibb.co/7x25kkFq/android-chrome-512x512.png">
+<link rel="icon" type="image/png" sizes="48x48" herf="https://raw.githubusercontent.com/aayushpokhrel49/aayushpokhrel/refs/heads/main/favicon.png">
+<link rel="manifest" href="site.webmanifest">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --accent: #f72585;
+            --gray: #adb5bd;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 150px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-meta-item i {
+            color: var(--primary);
+        }
+
+        .article-featured-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1.2rem;
+            color: var(--secondary);
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+
+        .article-content ul, 
+        .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-content a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Social Sharing Section */
+        .share-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 5%;
+            text-align: center;
+        }
+
+        .share-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .share-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-button i {
+            font-size: 1.2rem;
+        }
+
+        .share-twitter {
+            background-color: #1DA1F2;
+        }
+
+        .share-facebook {
+            background-color: #3B5998;
+        }
+
+        .share-linkedin {
+            background-color: #0077B5;
+        }
+
+        .share-whatsapp {
+            background-color: #25D366;
+        }
+
+        .share-copy {
+            background-color: var(--primary);
+        }
+
+        .share-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Article Footer */
+        .article-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 40px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .article-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .article-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            max-width: 45%;
+        }
+
+        .article-nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .article-nav-link i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(243, 114, 165, 0.03) 100%);
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .newsletter-description {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .newsletter-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            min-width: 120px;
+        }
+
+        .newsletter-button:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateX(2px);
+        }
+
+        .newsletter-button.subscribing {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+        }
+
+        /* Subscription Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .modal-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Warning box styles */
+        .warning-box {
+            background-color: #fff8f8;
+            border-left: 4px solid #ff5252;
+            padding: 20px;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff5252;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h4 i {
+            font-size: 1.2rem;
+        }
+
+        /* Stats highlight */
+        .stat-highlight {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        /* Table styles */
+        .article-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .article-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .article-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .article-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .article-table tr:nth-child(even) {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .article-table tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        /* Comment Section */
+        .comment-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .comment-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .comment-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .article-featured-image {
+                height: 300px;
+            }
+
+            .article-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .article-nav-link {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-button {
+                position: relative;
+                right: auto;
+                top: auto;
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
+
+            .article-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .share-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="../" class="logo">Aayush Pokhrel<span></span></a>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../blog">Blog</a></li>
+                <li><a href="../about">About</a></li>
+                <li><a href="../Social">Social Media</a></li>
+                <li><a href="../portfolio">Portfolio</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <article class="article-header fade-in">
+        <span class="article-category">Cybersecurity</span>
+        <h1 class="article-title">Cybercrime in Nepal: Are We Prepared for the Growing Threats</h1>
+        <div class="article-meta">
+            <div class="article-meta-item">
+                <i class="far fa-user"></i>
+                <span>Aayush Pokhrel</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>July 2, 2025</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-clock"></i>
+                <span>8 min read</span>
+            </div>
+        </div>
+        <img src="https://i.ibb.co/ynF2DpLT/eeb8fd10-a6a0-4a6a-b8e6-a5018068e31a.png" alt="Cybercrime threats" class="article-featured-image">
+    </article>
+
+    <!-- Article Content -->
+    <div class="article-content">
+        <p>In recent years, Nepal has seen the rapid expansion of internet usage and digital connectivity. Along with it, cybercrime has significantly increased. From online banking frauds, social media scams to large scale data breaches and online harassment, cybercriminals are exploiting the vulnerabilities of Nepal's digital infrastructure.</p>
+
+        <h2>A Significant Rise in Cyber Incidents</h2>
+
+        <div class="stat-highlight fade-in delay-1">
+            <div class="stat-number">19,730</div>
+            <div class="stat-label">Cybercrime cases reported in 2023-24</div>
+        </div>
+
+        <p>In 2023-24, the Nepal Police Cyber Bureau reported 19,730 cases, more than doubling from 9,013 the previous year, with online fraud (4,112 cases) and hacking (52% of total cases) leading the surge. This escalation mirrors global trends, as internet penetration reached 49.6% of Nepal's population (15.4 million users) in January 2024.</p>
+
+        <p>Common cybercrimes include phishing, identity theft, ransomware, and online harassment, with platforms like Telegram and WhatsApp frequently exploited. Common scams range from romance scams to phishing attacks, and online blackmail. Just recently, the country witnessed the exposure of a 50 GB data leak involving the Hello Sarkar grievance redressal system, highlighting how even government systems are not immune.</p>
+
+        <img src="https://i.ibb.co/YFc4BL0p/5c8b5282-d10f-4a40-8957-ddde717d94be.png" alt="Cybersecurity concept">
+
+        <h2>Why Is Nepal So Vulnerable?</h2>
+
+        <h3>1. Low Public Awareness</h3>
+        <p>A large portion of the population is unaware of basic cyber hygiene practices like strong passwords, two-factor authentication, and safe online behavior. This lack of awareness makes individuals easy targets for scammers and hackers.</p>
+
+        <h3>2. Weak Legal Framework</h3>
+        <p>Nepal's cyber laws still rely heavily on the Electronic Transaction Act 2008, which is outdated and lacks provisions to address modern threats like ransomware, identity theft, and data privacy violations.</p>
+
+        <div class="stat-highlight fade-in delay-2">
+            <div class="stat-number">2008</div>
+            <div class="stat-label">Electronic Transaction Act last updated</div>
+        </div>
+
+        <h3>3. Cross-Border Nature of Cybercrime</h3>
+        <p>Most cyberattacks originate from outside Nepal, making prosecution difficult without international cooperation.</p>
+
+        <h3>4. Limited Human Resources</h3>
+        <p>The Nepal Police Cyber Bureau is severely under resourced. With a limited number of personnel dedicated to IT investigation, the bureau struggles to keep pace with the rapidly increasing caseload.</p>
+
+        <h3>5. Weak Institutional Capacity</h3>
+        <p>Bodies like the Nepal CERT (Computer Emergency Response Team) exist but struggle with limited budgets, lack of advanced tools and overlapping mandates.</p>
+
+        <h2>Are We Prepared for Growth Threats?</h2>
+
+        <p>Not actually. Despite multiple efforts underway being made, the reality is we are not ready. Nepal's digital transformation has opened up countless opportunities but with it comes a new battlefield that demands vigilance, skills, and strong systems. If current gaps are not addressed, the consequences could be severe: financial losses, erosion of trust in digital services, and a slowdown of the country's digital economy. Experts warn that Nepal remains critically underprepared to handle sophisticated cyberattacks.</p>
+
+        <div class="warning-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Critical Vulnerability</h4>
+            <p>Nepal's cybersecurity infrastructure is currently unprepared for sophisticated attacks that could target critical infrastructure like banking systems, government databases, and power grids.</p>
+        </div>
+
+        <p>It's clear that the threat is real, but the question remains "Are we prepared?" The answer lies in how seriously we act now before the next big cyber attack makes headlines.</p>
+
+        <h2>What Should Be Done</h2>
+
+        <p>To truly protect the nation from cyber threats, Nepal needs a multi-pronged approach:</p>
+
+        <h3>1. Update Cyber Laws</h3>
+        <p>Introduce new legislation to address modern forms of cybercrime, data privacy, digital evidence handling, AI fraud, ransomware and crypto scams.</p>
+
+        <h3>2. Invest in Human Capital</h3>
+        <p>Develop more cybersecurity professionals through dedicated training, scholarships, and incentives to retain talent in the country.</p>
+
+        <h3>3. Establish a National Cybersecurity Authority</h3>
+        <p>Create a centralized agency with clear authority to coordinate defense, monitor threats, and quick response team to help victims.</p>
+
+        <h3>4. Public Awareness Campaigns</h3>
+        <p>Launch nationwide campaigns to educate citizens about safe online practices, password security, and scam detection.</p>
+
+        <h3>5. Strengthen International Cooperation</h3>
+        <p>Collaborate with global cybersecurity experts and organizations to share threat intelligence and adopt best practices.</p>
+
+        <div class="stat-highlight fade-in delay-3">
+            <div class="stat-number">5 Key</div>
+            <div class="stat-label">Areas needing immediate attention to combat cybercrime</div>
+        </div>
+
+        <p>Cybercrime is no longer a distant threat; it's here, and it's growing. Nepal cannot afford to lag behind in this digital arms race. Without urgent reforms, stronger legal protections, better-trained personnel, and widespread public education, the country will remain vulnerable to increasingly sophisticated cyber threats.</p>
+
+        <blockquote>
+            "In the digital age, national security is as much about cybersecurity as it is about physical borders."
+        </blockquote>
+
+        <p>It's time for Nepal to recognize cybercrime as a critical national issue and act accordingly.</p>
+    </div>
+
+    <!-- Social Sharing Section -->
+    <div class="share-section">
+        <h3>Share This Article</h3>
+        <div class="share-buttons">
+            <a href="#" class="share-button share-twitter" data-share="twitter">
+                <i class="fab fa-twitter"></i> Share on Twitter
+            </a>
+            <a href="#" class="share-button share-facebook" data-share="facebook">
+                <i class="fab fa-facebook-f"></i> Share on Facebook
+            </a>
+            <a href="#" class="share-button share-linkedin" data-share="linkedin">
+                <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+            </a>
+            <a href="#" class="share-button share-whatsapp" data-share="whatsapp">
+                <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            </a>
+            <a href="#" class="share-button share-copy" data-share="copy">
+                <i class="fas fa-link"></i> Copy Link
+            </a>
+        </div>
+    </div>
+
+    <!-- Comment Section -->
+    <div class="comment-section">
+        <h3>Join the Discussion</h3>
+        <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+        <div class="commonninja_component pid-b9cca1c0-259d-4aac-82b4-6473a7329cb7"></div>
+    </div>
+
+    <!-- Article Footer -->
+    <div class="article-footer">
+        <div class="article-tags">
+            <a href="#" class="article-tag">Cybersecurity</a>
+            <a href="#" class="article-tag">Cybercrime</a>
+            <a href="#" class="article-tag">Nepal</a>
+            <a href="#" class="article-tag">Technology</a>
+        </div>
+
+        <div class="article-navigation">
+            <a href="https://aayushhpokhrel.com.np/Digital%20Payment%20Growth%20in%20Nepal" class="article-nav-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Digital Payment Growth in Nepal</span>
+            </a>
+            <a href="#" class="article-nav-link" style="margin-left: auto; text-align: right;">
+                <span>Next: The Future of AI in Nepal</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container fade-in">
+            <h2 class="section-title">Stay Updated on Cybersecurity Trends</h2>
+            <p class="newsletter-description">Subscribe to receive the latest updates on cyber threats and digital security in Nepal.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button" id="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Subscription Success Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Aayush</h3>
+                <p>Creative designer and writer sharing insights on design, technology, and the creative process.</p>
+                <div class="social-links">
+                    <a href="https://x.com/aayushpokhrel49?t=d4l3RAACProAyr8kI_NupQ&s=09" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/aayushpokhrel49?igsh=MXd6anZ5djFzZThtdg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/aayush-pokhrel-b71260365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/aayushpokhrel49" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../blog">Blog</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="
+                    ../Social">Social media</a></li>
+                    <li><a href="../portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Cybersecurity Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="https://nepalcert.org.np/" target="_blank">Nepal CERT</a></li>
+                    <li><a href="https://www.nrb.org.np/" target="_blank">Nepal Rastra Bank</a></li>
+                    <li><a href="https://www.cybersecurity.gov.np/" target="_blank">Cybersecurity Portal</a></li>
+                    <li><a href="https://www.kaspersky.com/resource-center" target="_blank">Security Tips</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2025 Aayush Pokhrel. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../Privacy-policy">Privacy Policy</a>  
+                <a href="../Terms-of-service">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Navigation
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks) navLinks.classList.remove('active');
+                    if (hamburger) hamburger.classList.remove('active');
+                });
+            });
+
+            // Newsletter Form Submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+            const modal = document.getElementById('subscription-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalButton = document.querySelector('.modal-button');
+
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    subscribeBtn.classList.add('subscribing');
+                    subscribeBtn.textContent = 'Subscribing...';
+
+                    fetch(newsletterForm.action, {
+                        method: 'POST',
+                        body: new FormData(newsletterForm),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        subscribeBtn.classList.remove('subscribing');
+                        subscribeBtn.textContent = 'Subscribe';
+                        if (modal) modal.style.display = 'block';
+                        newsletterForm.reset();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        subscribeBtn.classList.remove('subscribing');
+                        subscribeBtn.textContent = 'Subscribe';
+                        alert('An error occurred. Please try again.');
+                    });
+                });
+            }
+
+            // Close Modal
+            if (closeModal) {
+                closeModal.addEventListener('click', () => {
+                    if (modal) modal.style.display = 'none';
+                });
+            }
+
+            if (modalButton) {
+                modalButton.addEventListener('click', () => {
+                    if (modal) modal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Social Sharing
+            const shareButtons = document.querySelectorAll('.share-button');
+            const articleUrl = encodeURIComponent('https://aayushhpokhrel.com.np/cybercrime-in-nepal');
+            const articleTitle = encodeURIComponent('Cybercrime in Nepal: Are We Prepared for the Growing Threats');
+            const articleDescription = encodeURIComponent('Examining the alarming rise of cybercrime in Nepal and the urgent need for stronger cybersecurity measures');
+
+            shareButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const platform = button.getAttribute('data-share');
+
+                    let shareUrl;
+                    switch (platform) {
+                        case 'twitter':
+                            shareUrl = `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`;
+                            window.open(shareUrl, '_blank');
+                            break;
+                        case 'facebook':
+                            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`;
+                            window.open(shareUrl, '_blank');
+                            break;
+                        case 'linkedin':
+                            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}&title=${articleTitle}&summary=${articleDescription}`;
+                            window.open(shareUrl, '_blank');
+                            break;
+                        case 'whatsapp':
+                            shareUrl = `https://api.whatsapp.com/send?text=${articleTitle}%20${articleUrl}`;
+                            window.open(shareUrl, '_blank');
+                            break;
+                        case 'copy':
+                            navigator.clipboard.writeText('https://aayushhpokhrel.com.np/cybercrime-in-nepal')
+                                .then(() => {
+                                    alert('Link copied to clipboard!');
+                                })
+                                .catch(err => {
+                                    console.error('Failed to copy: ', err);
+                                    alert('Failed to copy link. Please try again.');
+                                });
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
