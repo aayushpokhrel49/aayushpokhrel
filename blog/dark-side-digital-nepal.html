@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dark Side of Digital Nepal: Scams, Fraud, and How to Stay Safe Online | Aayush Pokhrel</title>
+    <meta name="description" content="Exploring the growing cyber threats in Nepal's digital landscape and how to protect yourself from online scams">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The Dark Side of Digital Nepal: Scams, Fraud, and How to Stay Safe Online">
+    <meta property="og:description" content="Exploring the growing cyber threats in Nepal's digital landscape and how to protect yourself from online scams">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal">
+    <meta property="og:image" content="https://cdn.qwenlm.ai/output/52c3a195-0216-4dda-88ca-f09431407302/t2i/29529c2b-750e-43b9-8400-2296a47a37da/a2dd5daf-62af-4361-b89e-48fd3fdb02de.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNTJjM2ExOTUtMDIxNi00ZGRhLTg4Y2EtZjA5NDMxNDA3MzAyIiwicmVzb3VyY2VfaWQiOiJhMmRkNWRhZi02MmFmLTQzNjEtYjg5ZS00OGZkM2ZkYjAyZGUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.4f5ZMxs0e8AkQvlNQH7PAoj45wrvDSTiWuRzUuvJSV0">
+    <meta property="og:site_name" content="Aayush Pokhrel">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --accent: #f72585;
+            --gray: #adb5bd;
+            --light-gray: #e9ecef;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 150px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-meta-item i {
+            color: var(--primary);
+        }
+
+        .article-featured-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 40px 0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1.2rem;
+            color: var(--secondary);
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+
+        .article-content ul, 
+        .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-content a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Social Sharing */
+        .social-sharing {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .social-share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .linkedin { background-color: #0077b5; }
+        .whatsapp { background-color: #25d366; }
+        .telegram { background-color: #0088cc; }
+
+        .social-share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Article Footer */
+        .article-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 40px;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .article-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .article-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .article-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            max-width: 45%;
+        }
+
+        .article-nav-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .article-nav-link i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.03) 0%, rgba(243, 114, 165, 0.03) 100%);
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .newsletter-description {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .newsletter-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            min-width: 120px;
+        }
+
+        .newsletter-button:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateX(2px);
+        }
+
+        .newsletter-button.subscribing {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+        }
+
+        /* Subscription Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .modal-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Warning box styles */
+        .warning-box {
+            background-color: #fff8f8;
+            border-left: 4px solid #ff5252;
+            padding: 20px;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff5252;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h4 i {
+            font-size: 1.2rem;
+        }
+
+        /* Stats highlight */
+        .stat-highlight {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        /* Table styles */
+        .article-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .article-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .article-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .article-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .article-table tr:nth-child(even) {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .article-table tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .article-featured-image {
+                height: 300px;
+            }
+
+            .article-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .article-nav-link {
+                max-width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-button {
+                position: relative;
+                right: auto;
+                top: auto;
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
+
+            .article-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Navigation -->
+    <header id="header">
+        <nav class="navbar">
+            <a href="../" class="logo">Aayush Pokhrel<span></span></a>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../blog">Blog</a></li>
+                <li><a href="../about">About</a></li>
+                <li><a href="../Social">Social Media</a></li>
+                <li><a href="../portfolio">Portfolio</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <article class="article-header fade-in">
+        <span class="article-category">Cybersecurity</span>
+        <h1 class="article-title">The Dark Side of Digital Nepal: Scams, Fraud, and How to Stay Safe Online</h1>
+        <div class="article-meta">
+            <div class="article-meta-item">
+                <i class="far fa-user"></i>
+                <span>Aayush Pokhrel</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>July 6, 2025</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="far fa-clock"></i>
+                <span>10 min read</span>
+            </div>
+        </div>
+        <img src="https://cdn.qwenlm.ai/output/52c3a195-0216-4dda-88ca-f09431407302/t2i/29529c2b-750e-43b9-8400-2296a47a37da/a2dd5daf-62af-4361-b89e-48fd3fdb02de.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNTJjM2ExOTUtMDIxNi00ZGRhLTg4Y2EtZjA5NDMxNDA3MzAyIiwicmVzb3VyY2VfaWQiOiJhMmRkNWRhZi02MmFmLTQzNjEtYjg5ZS00OGZkM2ZkYjAyZGUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.4f5ZMxs0e8AkQvlNQH7PAoj45wrvDSTiWuRzUuvJSV0" alt="Digital security concept" class="article-featured-image">
+    </article>
+
+    <!-- Article Content -->
+    <div class="article-content">
+        <p>Over the past decade, Nepal's rapid digital transformation has brought big opportunities from online banking to e-governance, but it has also opened the floodgates to cybercriminals. Online scams, fraud and cybercriminals are increasingly targeting unsuspecting users in their everyday lives.</p>
+
+        <div class="stat-highlight fade-in delay-1">
+            <div class="stat-number">23.7 Million</div>
+            <div class="stat-label">Mobile banking users in Nepal</div>
+        </div>
+
+        <p>According to the Cyber Bureau, reports of online scams and fraud have been rapidly increasing. With 90% internet penetration and 23.7 million mobile banking users, Nepal is a prime target for scammers exploiting digital vulnerabilities. From phishing scams to AI-powered deepfakes, online scammers/cybercriminals are evolving faster than defenses. In 2024 alone, thousands of people lost their savings, personal data or even their dignity to scammers.</p>
+
+        <h2>Common Online Scams in Nepal</h2>
+
+        <h3>1. Phishing Scams</h3>
+        <p>Cybercriminals send fake emails or SMS messages pretending to be from banks, telecom companies, or popular apps like eSewa or Ncell. These often contain links that lead to fraudulent websites designed to steal login credentials or personal information.</p>
+        <p><strong>Example:</strong> A message claiming your account is suspended and asking you to click a link to "verify" your details.</p>
+
+        <h3>2. Fake Job Offers</h3>
+        <p>Scammers post attractive job offers on social media or job portals, promising high salaries or quick money. They may ask victims to pay processing fees or provide sensitive information before disappearing.</p>
+        <ul>
+            <li>No official contact details</li>
+            <li>Asking for payment upfront</li>
+            <li>Too-good-to-be-true salary offers</li>
+        </ul>
+
+        <h3>3. Online Shopping Frauds</h3>
+        <p>With the rise of e-commerce, many fake online shops have emerged selling products at suspiciously low prices. After receiving payment, they either deliver counterfeit items or nothing at all.</p>
+        <p><strong>Platforms used:</strong> Facebook Marketplace, Instagram, TikTok, and unknown local websites</p>
+
+        <h3>4. Loan & Investment Scams</h3>
+        <p>Apps or websites offering easy loans or investment schemes promise high returns or zero-interest loans but require upfront fees or access to your bank account.</p>
+        <p><strong>Recent trend:</strong> Fake crypto or forex investment platforms targeting young investors.</p>
+
+        <h3>5. SIM Swap Fraud</h3>
+        <p>Criminals trick telecom providers into transferring a victim's phone number to a new SIM card, allowing them to bypass two-factor authentication and take control of bank accounts or digital wallets.</p>
+
+        <h3>6. Social Media Hacking & Impersonation</h3>
+        <p>Hackers gain access to Facebook, Instagram, or WhatsApp accounts and impersonate victims to scam friends and family.</p>
+
+        <h3>7. Phishing & Fake Banking Calls</h3>
+        <p>Scammers pretend to be from banks or mobile wallet companies, tricking users into sharing OTPs, PINs, or account details.</p>
+
+        <div class="warning-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Real-Life Cases in Nepal</h4>
+            <p>In 2023, hundreds of users lost thousands of rupees after falling for fake eSewa verification links. Many more have been victims of similar scams across various platforms.</p>
+        </div>
+
+        <h2>Why Are These Scams So Common?</h2>
+
+        <ul>
+            <li><strong>Low Digital Literacy:</strong> Many people don't know how to validate online information</li>
+            <li><strong>Weak Regulation:</strong> Cybercrime laws exist but enforcement is slow and inefficient</li>
+            <li><strong>Anonymity:</strong> Scammers easily hide behind fake profiles and untraceable phone numbers</li>
+            <li><strong>Trust Culture:</strong> Many Nepalis are naturally trusting and hesitate to suspect fraud</li>
+        </ul>
+
+        <img src="https://cdn.qwenlm.ai/output/52c3a195-0216-4dda-88ca-f09431407302/t2i/d94b084c-dd24-46ca-8053-68ec0c735d57/38f84918-d97e-4074-ad6c-564c19552b41.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiNTJjM2ExOTUtMDIxNi00ZGRhLTg4Y2EtZjA5NDMxNDA3MzAyIiwicmVzb3VyY2VfaWQiOiIzOGY4NDkxOC1kOTdlLTQwNzQtYWQ2Yy01NjRjMTk1NTJiNDEiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.yTtFPNJfT3rpQ9TcRd2NKjKCvvT_PfKVWVrpkxRp83Q" alt="Cybersecurity awareness">
+
+        <h2>How To Stay Safe Online in Nepal</h2>
+
+        <h3>1. Think Twice Before Clicking Any Link</h3>
+        <p>Don't trust suspicious links or offers that sound too good to be true. Verify pages before making payments or sharing information.</p>
+
+        <h3>2. Never Share OTPs or PINS</h3>
+        <p>Your bank or e-wallet will NEVER ask for them. If you get such a call, hang up immediately.</p>
+
+        <h3>3. Be Cautious with Personal Photos</h3>
+        <p>Don't share sensitive photos or videos that could be misused.</p>
+
+        <h3>4. Enable Two-Step Authentication</h3>
+        <p>Wherever possible, enable 2FA on your email, banking, and social media accounts for an extra layer of security.</p>
+
+        <h3>5. Use Strong, Unique Passwords</h3>
+        <p>Avoid using simple passwords like "123456" or "password." Use a mix of letters, numbers, and symbols, and consider using a password manager.</p>
+
+        <h3>6. Be Skeptical of Too-Good-to-Be-True Offers</h3>
+        <p>If something seems too cheap or too easy, it probably is. Always verify the source before purchasing.</p>
+
+        <h3>7. Report Suspicious Activity</h3>
+        <p>If you suspect you've been scammed:</p>
+        <ul>
+            <li>Contact your bank immediately</li>
+            <li>Report to Cyber Crime Bureau Nepal Police</li>
+            <li>File a complaint via <a href="https://cybercrime.gov.np" target="_blank">cybercrime.gov.np</a></li>
+        </ul>
+
+        <div class="stat-highlight fade-in delay-2">
+            <div class="stat-number">7 Essential</div>
+            <div class="stat-label">Cybersecurity practices for Nepali internet users</div>
+        </div>
+
+        <blockquote>
+            "Awareness is the First Line of Defense. While the government and private sector are working to improve cybersecurity infrastructure in Nepal, individual awareness remains critical. Schools, colleges, and community programs must include digital literacy and cyber safety education as part of their curriculum."
+        </blockquote>
+
+        <h2>A Safer Digital Nepal Is Possible</h2>
+
+        <p>Digital Nepal holds great promise, but its dark side - filled with scams, frauds, and exploitation - must not be ignored. By staying informed, cautious, and proactive, every citizen can contribute to making Nepal's digital space safer for everyone.</p>
+
+        <p>Stay smart. Stay safe. Stay connected.</p>
+
+        <p><strong>Remember:</strong> "Your data is valuable. Protect it like cash"</p>
+
+        <!-- Social Sharing Buttons -->
+        <div class="social-sharing">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal" class="social-share-btn facebook" target="_blank" aria-label="Share on Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=The%20Dark%20Side%20of%20Digital%20Nepal%20-%20Scams,%20Fraud,%20and%20How%20to%20Stay%20Safe%20Online&url=https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal" class="social-share-btn twitter" target="_blank" aria-label="Share on Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal&title=The%20Dark%20Side%20of%20Digital%20Nepal&summary=Exploring%20the%20growing%20cyber%20threats%20in%20Nepal's%20digital%20landscape%20and%20how%20to%20protect%20yourself%20from%20online%20scams" class="social-share-btn linkedin" target="_blank" aria-label="Share on LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/?text=Check%20out%20this%20article%20about%20cybersecurity%20in%20Nepal:%20https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal" class="social-share-btn whatsapp" target="_blank" aria-label="Share on WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://t.me/share/url?url=https://aayushhpokhrel.com.np/blog/dark-side-digital-nepal&text=The%20Dark%20Side%20of%20Digital%20Nepal%20-%20Scams,%20Fraud,%20and%20How%20to%20Stay%20Safe%20Online" class="social-share-btn telegram" target="_blank" aria-label="Share on Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Article Footer -->
+    <div class="article-footer">
+        <div class="article-tags">
+            <a href="#" class="article-tag">Cybersecurity</a>
+            <a href="#" class="article-tag">Online Scams</a>
+            <a href="#" class="article-tag">Digital Nepal</a>
+            <a href="#" class="article-tag">Internet Safety</a>
+        </div>
+
+        <div class="article-navigation">
+            <a href="#" class="article-nav-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Cybercrime in Nepal</span>
+            </a>
+            <a href="#" class="article-nav-link" style="margin-left: auto; text-align: right;">
+                <span>Next: Protecting Your Digital Identity</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container fade-in">
+            <h2 class="section-title">Stay Updated on Cybersecurity</h2>
+            <p class="newsletter-description">Subscribe to receive the latest updates on digital threats and online safety tips.</p>
+            <form id="newsletter-form" class="newsletter-form" action="https://sheetdb.io/api/v1/o2qi5ieq2442s" method="POST">
+                <input type="email" name="data[email]" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button" id="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Subscription Success Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You for Subscribing!</h3>
+            <p>You've been successfully added to our newsletter list. Stay tuned for exciting updates!</p>
+            <button class="modal-button">Got It</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Aayush</h3>
+                <p>Creative designer and writer sharing insights on design, technology, and the creative process.</p>
+                <div class="social-links">
+                    <a href="https://x.com/aayushpokhrel49?t=d4l3RAACProAyr8kI_NupQ&s=09" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/aayushpokhrel49?igsh=MXd6anZ5djFzZThtdg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/aayush-pokhrel-b71260365?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/aayushpokhrel49" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="
+                    ../blog">Blog</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../Social">Social media</a></li>
+                    <li><a href="
+                    ../portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Security Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="https://cybercrime.gov.np" target="_blank">Cyber Crime Nepal</a></li>
+                    <li><a href="https://www.nrb.org.np/" target="_blank">Nepal Rastra Bank</a></li>
+                    <li><a href="https://www.kaspersky.com/resource-center" target="_blank">Security Tips</a></li>
+                    <li><a href="https://haveibeenpwned.com/" target="_blank">Check Data Breaches</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 Aayush Pokhrel. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../Privacy-policy">Privacy Policy</a>&nbsp;&nbsp;
+                <a href="../Terms-of-service">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Navigation
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks) navLinks.classList.remove('active');
+                    if (hamburger) hamburger.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.fade-in:not(.animated)');
+
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('animated');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+
+            // Newsletter Form Submission
+            const newsletterForm = document.getElementById('newsletter-form');
+            const subscriptionModal = document.getElementById('subscription-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalButton = document.querySelector('.modal-button');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+
+            if (newsletterForm && subscribeBtn) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(this);
+
+                    // Simple validation
+                    const email = formData.get('data[email]');
+                    if (!email || !email.includes('@')) {
+                        alert('Please enter a valid email address');
+                        return;
+                    }
+
+                    // Show classic "Subscribing..." text animation
+                    const originalText = subscribeBtn.textContent;
+                    let dots = 0;
+                    subscribeBtn.textContent = 'Subscribing';
+                    subscribeBtn.disabled = true;
+                    subscribeBtn.classList.add('subscribing');
+
+                    const loadingInterval = setInterval(() => {
+                        dots = (dots + 1) % 4;
+                        subscribeBtn.textContent = 'Subscribing' + '.'.repeat(dots);
+                    }, 500);
+
+                    // Submit form data (using fetch API)
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        clearInterval(loadingInterval);
+                        if (response.ok) {
+                            // Show success modal
+                            if (subscriptionModal) subscriptionModal.style.display = 'block';
+                            // Reset form and button
+                            newsletterForm.reset();
+                            subscribeBtn.textContent = originalText;
+                            subscribeBtn.disabled = false;
+                            subscribeBtn.classList.remove('subscribing');
+                        } else {
+                            throw new Error('Network response was not ok');
+                        }
+                    })
+                    .catch(error => {
+                        clearInterval(loadingInterval);
+                        console.error('Error:', error);
+                        subscribeBtn.textContent = originalText;
+                        subscribeBtn.disabled = false;
+                        subscribeBtn.classList.remove('subscribing');
+                        alert('There was a problem with your submission. Please try again.');
+                    });
+                });
+            }
+
+            // Close modal when clicking X or button
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            if (modalButton) {
+                modalButton.addEventListener('click', function() {
+                    if (subscriptionModal) subscriptionModal.style.display = 'none';
+                });
+            }
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === subscriptionModal) {
+                    subscriptionModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
