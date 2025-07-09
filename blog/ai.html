@@ -182,24 +182,6 @@
             border-radius: 20px;
         }
         
-        .logout-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .logout-btn:hover { 
-            background: rgba(255, 255, 255, 0.3); 
-        }
-        
         .main-container {
             display: flex;
             flex: 1;
@@ -342,6 +324,145 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        
+        /* Profile Modal Styles */
+        .profile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: var(--transition);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .profile-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .profile-card {
+            background: var(--card);
+            padding: calc(var(--spacing) * 2);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid var(--divider);
+            transform: translateY(-20px);
+            transition: var(--transition);
+        }
+        
+        .profile-modal.active .profile-card {
+            transform: translateY(0);
+        }
+        
+        .profile-card h2 {
+            margin-bottom: var(--spacing);
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0 auto var(--spacing);
+        }
+        
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .profile-email {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: var(--spacing);
+        }
+        
+        .profile-bio {
+            margin-bottom: var(--spacing);
+            text-align: left;
+        }
+        
+        .profile-bio textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius);
+            border: 1px solid var(--divider);
+            background: var(--input-bg);
+            color: var(--text);
+            resize: none;
+            min-height: 100px;
+            margin-bottom: var(--spacing);
+        }
+        
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .profile-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .save-btn {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .logout-btn:hover {
+            background: #e64980;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
         }
         
         .chat-container {
@@ -1007,17 +1128,19 @@
                 max-width: 100px; 
             }
             
-            .logout-btn { 
-                padding: 6px 10px; 
-                font-size: 0.8rem; 
-            }
-            
-            .logout-btn span { 
-                display: none; 
-            }
-            
             .voice-recording {
                 bottom: 100px;
+            }
+            
+            .profile-card {
+                padding: var(--spacing);
+                max-width: 90%;
+            }
+            
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
             }
         }
 
@@ -1058,6 +1181,28 @@
         </div>
     </div>
     
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profile-modal">
+        <div class="profile-card">
+            <button class="close-btn" id="close-profile-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="profile-avatar" id="profile-avatar">U</div>
+            <div class="profile-name" id="profile-name">User</div>
+            <div class="profile-email" id="profile-email">user@example.com</div>
+            
+            <div class="profile-bio">
+                <label for="bio-textarea">About Me</label>
+                <textarea id="bio-textarea" placeholder="Tell us about yourself..."></textarea>
+            </div>
+            
+            <div class="profile-actions">
+                <button class="profile-btn save-btn" id="save-profile-btn">Save</button>
+                <button class="profile-btn logout-btn" id="profile-logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- Main App -->
     <div class="app">
         <div class="header">
@@ -1067,9 +1212,6 @@
             </div>
             <div class="header-actions">
                 <span class="user-status" id="user-status">Sign in to continue</span>
-                <button class="logout-btn" id="logout-btn" style="display: none;">
-                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                </button>
                 <button class="toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1175,7 +1317,6 @@
         const signInTab = document.getElementById("sign-in-tab");
         const createAccountTab = document.getElementById("create-account-tab");
         const userStatus = document.getElementById("user-status");
-        const logoutBtn = document.getElementById("logout-btn");
         const micBtn = document.getElementById("mic-btn");
         const statusMessage = document.getElementById("status-message");
         const sidebarToggle = document.getElementById("sidebar-toggle");
@@ -1189,11 +1330,22 @@
         const userAvatar = document.getElementById("user-avatar");
         const voiceRecording = document.getElementById("voice-recording");
         const stopRecordingBtn = document.getElementById("stop-recording");
+        
+        // Profile modal elements
+        const profileModal = document.getElementById("profile-modal");
+        const profileAvatar = document.getElementById("profile-avatar");
+        const profileName = document.getElementById("profile-name");
+        const profileEmail = document.getElementById("profile-email");
+        const bioTextarea = document.getElementById("bio-textarea");
+        const saveProfileBtn = document.getElementById("save-profile-btn");
+        const profileLogoutBtn = document.getElementById("profile-logout-btn");
+        const closeProfileBtn = document.getElementById("close-profile-btn");
 
         // State Variables
         let currentUser = null;
         let currentSessionId = null;
         let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || {};
+        let userBio = localStorage.getItem('userBio') || '';
         let recognition = null;
         let isRecognizing = false;
         let isSignInMode = true;
@@ -1669,7 +1821,24 @@
             userName.textContent = displayName;
             userEmail.textContent = currentUser.email;
             userAvatar.textContent = firstLetter;
-            logoutBtn.style.display = 'inline-flex';
+            
+            // Update profile modal
+            profileName.textContent = displayName;
+            profileEmail.textContent = currentUser.email;
+            profileAvatar.textContent = firstLetter;
+            bioTextarea.value = userBio;
+        }
+
+        function toggleProfileModal() {
+            profileModal.classList.toggle('active');
+        }
+
+        function saveProfile() {
+            userBio = bioTextarea.value;
+            localStorage.setItem('userBio', userBio);
+            statusMessage.textContent = "Profile updated successfully!";
+            setTimeout(() => statusMessage.textContent = "", 3000);
+            toggleProfileModal();
         }
 
         async function handleLogout() {
@@ -1683,7 +1852,6 @@
                 userName.textContent = 'User';
                 userEmail.textContent = 'user@example.com';
                 userAvatar.textContent = 'U';
-                logoutBtn.style.display = 'none';
                 loginModal.classList.remove('hidden');
                 updateHistory();
                 loadSession(generateSessionId());
@@ -1803,12 +1971,17 @@
         createAccountTab.addEventListener('click', showCreateAccount);
         authBtn.addEventListener('click', () => isSignInMode ? handleSignIn() : handleCreateAccount());
         googleBtn.addEventListener('click', handleGoogleLogin);
-        logoutBtn.addEventListener('click', handleLogout);
         sidebarToggle.addEventListener('click', toggleSidebar);
         themeToggle.addEventListener('click', toggleTheme);
         micBtn.addEventListener('click', toggleSpeechRecognition);
         stopRecordingBtn.addEventListener('click', stopVoiceRecording);
         newChatBtn.addEventListener('click', createNewChat);
+        
+        // Profile related event listeners
+        userProfile.addEventListener('click', toggleProfileModal);
+        closeProfileBtn.addEventListener('click', toggleProfileModal);
+        saveProfileBtn.addEventListener('click', saveProfile);
+        profileLogoutBtn.addEventListener('click', handleLogout);
 
         chatForm.addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -2019,7 +2192,6 @@
                     userName.textContent = 'User';
                     userEmail.textContent = 'user@example.com';
                     userAvatar.textContent = 'U';
-                    logoutBtn.style.display = 'none';
                     loginModal.classList.remove('hidden');
                     updateHistory();
                     statusMessage.textContent = "Please sign in to continue";
